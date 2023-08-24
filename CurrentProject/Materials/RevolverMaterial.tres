@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://doodcrevgqju3"]
+
+[ext_resource type="Texture2D" uid="uid://bq7tifev5v5x6" path="res://Textures/Revolver/Revolver_Albedo.png" id="1_xs5g1"]
+[ext_resource type="Texture2D" uid="uid://bbgluoomxk54d" path="res://Textures/Revolver/Revolver_Metalness.png" id="2_lr037"]
+[ext_resource type="Texture2D" uid="uid://bclyik584ia65" path="res://Textures/Revolver/Revolver_Normals.png" id="3_ncxx6"]
+[ext_resource type="Texture2D" uid="uid://baxumu0hoyajg" path="res://Textures/Revolver/Revolver_Roughness.png" id="4_21k8o"]
+
+[resource]
+albedo_texture = ExtResource("1_xs5g1")
+metallic = 1.0
+metallic_texture = ExtResource("2_lr037")
+roughness_texture = ExtResource("4_21k8o")
+normal_enabled = true
+normal_texture = ExtResource("3_ncxx6")
