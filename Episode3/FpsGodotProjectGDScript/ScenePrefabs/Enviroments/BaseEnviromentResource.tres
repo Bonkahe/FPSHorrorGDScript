@@ -1,0 +1,24 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://x0wf52dblwpf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6rcro"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_betpb"]
+sky_material = SubResource("ProceduralSkyMaterial_6rcro")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_betpb")
+tonemap_mode = 3
+ssr_enabled = true
+ssr_fade_in = 0.819623
+ssao_enabled = true
+sdfgi_enabled = true
+sdfgi_cascades = 6
+sdfgi_min_cell_size = 0.0366211
+sdfgi_y_scale = 0
+glow_enabled = true
+glow_bloom = 0.2
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0245

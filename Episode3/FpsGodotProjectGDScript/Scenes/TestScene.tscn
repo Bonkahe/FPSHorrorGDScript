@@ -1,0 +1,292 @@
+[gd_scene load_steps=11 format=3 uid="uid://c21mx7ucoa106"]
+
+[ext_resource type="PackedScene" uid="uid://cbkuu0rnihxcb" path="res://ScenePrefabs/ArmsPrefab.tscn" id="1_y5w6r"]
+[ext_resource type="Environment" uid="uid://x0wf52dblwpf" path="res://ScenePrefabs/Enviroments/BaseEnviromentResource.tres" id="3_cx7uj"]
+[ext_resource type="Script" path="res://Code/PlayerBodyController.gd" id="3_g2u7s"]
+[ext_resource type="CameraAttributesPractical" uid="uid://brqve1irx5j4p" path="res://ScenePrefabs/Enviroments/BaseCameraAttributes.tres" id="4_h5l6m"]
+[ext_resource type="Script" path="res://Code/Enemys/Damageable.gd" id="5_fx2o6"]
+[ext_resource type="PackedScene" uid="uid://cfgwxv8foypvp" path="res://ScenePrefabs/Effects/ImpactEffectEnemy.tscn" id="6_le8pm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uioy7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epyh2"]
+albedo_color = Color(0.239216, 0.215686, 0.203922, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hba1o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ydv7q"]
+
+[node name="TestScene" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
+
+[node name="PlayerBody" type="CharacterBody3D" parent="." node_paths=PackedStringArray("gunEffects", "animationTree", "CameraNode", "ArmsNode")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.28412, 0.668381, 0)
+collision_layer = 2
+script = ExtResource("3_g2u7s")
+gunEffects = NodePath("ArmsContainer/ArmsMesh/WeaponEffectsController")
+animationTree = NodePath("ArmsContainer/ArmsMesh/AnimationTree")
+HandStateMachinePlaybackPath = "parameters/playback"
+IdleAnimationName = "IdleLowered"
+AimingAnimationName = "IdleRaised"
+IdleFireAnimationName = "FiringLowered1"
+AimingFireAnimationName = "FiringRaised1"
+ReloadAnimationName = "Reloading"
+CameraNode = NodePath("Camera3D")
+ArmsNode = NodePath("ArmsContainer")
+RotationSpeed = 0.3
+CameraActualRotationSpeed = 20.0
+ArmsActualRotationSpeed = 12.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody"]
+shape = SubResource("CapsuleShape3D_uioy7")
+
+[node name="ArmsContainer" type="Node3D" parent="PlayerBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ArmsMesh" parent="PlayerBody/ArmsContainer" instance=ExtResource("1_y5w6r")]
+
+[node name="Skeleton3D" parent="PlayerBody/ArmsContainer/ArmsMesh/rig" index="0"]
+bones/127/rotation = Quaternion(0.382475, -0.517415, 0.605357, 0.468549)
+bones/127/scale = Vector3(0.999116, 0.999116, 0.999116)
+bones/128/rotation = Quaternion(0.196698, -2.35776e-08, 1.13647e-08, 0.980464)
+bones/129/rotation = Quaternion(0.0123666, 0.663418, -0.082566, 0.743577)
+bones/129/scale = Vector3(1.00121, 1.00121, 1.00121)
+bones/138/scale = Vector3(1.00121, 1.00121, 1.00121)
+bones/140/rotation = Quaternion(-3.24903e-08, 0.356816, 1.26524e-07, 0.934175)
+bones/140/scale = Vector3(1.00121, 1.00121, 1.00121)
+bones/142/scale = Vector3(1.00089, 1.00089, 1.00089)
+bones/143/scale = Vector3(1.00089, 1.00089, 1.00089)
+bones/152/rotation = Quaternion(-0.10687, -0.623, 0.0556897, 0.772883)
+bones/153/rotation = Quaternion(-0.0856673, 0.00782889, 0.000673165, 0.996293)
+bones/153/scale = Vector3(0.999115, 0.999116, 0.999115)
+bones/154/rotation = Quaternion(0.196665, -2.40952e-08, 1.59949e-08, 0.980471)
+bones/155/rotation = Quaternion(0.381506, -0.516668, 0.60598, 0.469357)
+bones/157/rotation = Quaternion(0.381506, -0.516668, 0.60598, 0.469357)
+bones/159/rotation = Quaternion(0.196665, -0.000787065, 0.00015781, 0.98047)
+bones/160/rotation = Quaternion(9.41075e-09, 0.35746, 4.04358e-08, 0.933929)
+bones/161/rotation = Quaternion(0.041069, 0.355038, -0.0726954, 0.931116)
+bones/161/scale = Vector3(0.999761, 1.00047, 0.999766)
+bones/232/rotation = Quaternion(0.972125, 3.8065e-09, 0.234465, 7.62952e-10)
+bones/266/position = Vector3(0.261869, 0.209983, -0.284473)
+bones/266/rotation = Quaternion(0.132592, 0.210214, -0.774526, 0.581669)
+bones/266/scale = Vector3(1, 24.2222, 1)
+bones/273/position = Vector3(-0.0738115, 0.00730722, 0.00533371)
+bones/273/rotation = Quaternion(-0.03655, 0.0703615, 0.0216132, 0.996617)
+
+[node name="BaseAttachment" parent="PlayerBody/ArmsContainer/ArmsMesh/rig/Skeleton3D" index="12"]
+transform = Transform3D(1.00037, 0.00290094, -0.0015999, -0.00148711, 0.824953, 0.565857, 0.00296024, -0.565852, 0.824954, 0.194062, -0.362892, -0.500657)
+
+[node name="FrontAttachment" parent="PlayerBody/ArmsContainer/ArmsMesh/rig/Skeleton3D" index="13"]
+transform = Transform3D(1.00037, 0.00149857, -0.00295371, -0.0014868, 1.00036, 0.00392497, 0.00295955, -0.00392032, 1.00036, 0.194695, -0.266743, -0.666462)
+
+[node name="RevolverAmmoAttachment" parent="PlayerBody/ArmsContainer/ArmsMesh/rig/Skeleton3D" index="14"]
+transform = Transform3D(1.00037, -0.00295421, -0.00149807, -0.0014863, 0.00392485, -1.00036, 0.00296004, 1.00036, 0.0039202, 0.194667, -0.246038, -0.646675)
+
+[node name="Flashlight" type="SpotLight3D" parent="PlayerBody/ArmsContainer"]
+transform = Transform3D(0.999986, 0.000763698, 0.00525032, -0.00161713, 0.986371, 0.164527, -0.00505312, -0.164533, 0.986359, -0.278397, -0.0648718, 0.00209618)
+light_indirect_energy = 6.334
+light_volumetric_fog_energy = 0.01
+spot_range = 57.7935
+spot_angle = 24.1437
+
+[node name="Camera3D" type="Camera3D" parent="PlayerBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+current = true
+fov = 60.0
+
+[node name="Enviroment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment"]
+environment = ExtResource("3_cx7uj")
+camera_attributes = ExtResource("4_h5l6m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviroment"]
+transform = Transform3D(-0.815311, 0.132655, -0.563623, -0.365873, 0.636425, 0.679044, 0.448782, 0.759846, -0.47035, -0.870116, 1.11763, -3.90066)
+light_indirect_energy = 5.064
+light_volumetric_fog_energy = 11.032
+shadow_enabled = true
+shadow_bias = 0.035
+shadow_normal_bias = 0.216
+shadow_blur = 1.081
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 500.0
+directional_shadow_pancake_size = 0.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.4837, 2.50334, 13.003)
+light_color = Color(0.913725, 0.760784, 0.831373, 1)
+light_energy = 4.114
+light_indirect_energy = 5.93
+light_size = 0.043
+shadow_enabled = true
+shadow_blur = 2.596
+omni_range = 33.435
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.3847, 5.00567, -22.9824)
+light_color = Color(0.639216, 0.439216, 0.290196, 1)
+light_energy = 2.854
+light_indirect_energy = 6.535
+light_size = 0.551
+shadow_enabled = true
+shadow_blur = 1.162
+omni_range = 35.696
+omni_attenuation = 1.51572
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.4629, 5.00567, -22.9824)
+light_color = Color(0.639216, 0.439216, 0.290196, 1)
+light_energy = 2.854
+light_indirect_energy = 6.535
+light_size = 0.551
+shadow_enabled = true
+shadow_blur = 1.162
+omni_range = 35.696
+omni_attenuation = 1.51572
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4629, 5.00567, -22.9824)
+light_color = Color(0.639216, 0.439216, 0.290196, 1)
+light_energy = 2.854
+light_indirect_energy = 6.535
+light_size = 0.551
+shadow_enabled = true
+shadow_blur = 1.162
+omni_range = 35.696
+omni_attenuation = 1.51572
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.8472, 5.00567, -22.9824)
+light_color = Color(0.639216, 0.439216, 0.290196, 1)
+light_energy = 2.854
+light_indirect_energy = 6.535
+light_size = 0.551
+shadow_enabled = true
+shadow_blur = 1.162
+omni_range = 35.696
+omni_attenuation = 1.51572
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.9253, 5.00567, -22.9824)
+light_color = Color(0.639216, 0.439216, 0.290196, 1)
+light_energy = 2.854
+light_indirect_energy = 6.535
+light_size = 0.551
+shadow_enabled = true
+shadow_blur = 1.162
+omni_range = 35.696
+omni_attenuation = 1.51572
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.92535, 5.00567, -22.9824)
+light_color = Color(0.639216, 0.439216, 0.290196, 1)
+light_energy = 2.854
+light_indirect_energy = 6.535
+light_size = 0.551
+shadow_enabled = true
+shadow_blur = 1.162
+omni_range = 35.696
+omni_attenuation = 1.51572
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.3542, -0.852151, 31.0541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(91.2936, 1, 127.385)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.6987, 10.3353, -4)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(66.7801, 8.00213, 220.415)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.0103, -0.324528, 1.22541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(5.10439, 28.8119, 3.68145)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.0103, -0.324528, 1.22541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(5.10439, 28.8119, 65.6866)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.8818, -0.324528, -29.2086)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(85.8267, 28.8119, 10.6161)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3036, -0.324528, 17.3694)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(85.8267, 28.8119, 10.6161)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.3287, -0.324528, 1.22541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(5.10439, 28.8119, 3.68145)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.029, -0.324528, 1.22541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(5.10439, 28.8119, 3.68145)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.39, -0.324528, 1.22541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(5.10439, 28.8119, 3.68145)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7084, -0.324528, 1.22541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(5.10439, 28.8119, 3.68145)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4087, -0.324528, 1.22541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(5.10439, 28.8119, 3.68145)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4755, -0.324528, 1.22541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(5.10439, 28.8119, 3.68145)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20601, -0.324528, 1.22541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(5.10439, 28.8119, 3.68145)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Enviroment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5057, -0.324528, 1.22541)
+material_override = SubResource("StandardMaterial3D_epyh2")
+use_collision = true
+size = Vector3(5.10439, 28.8119, 3.68145)
+
+[node name="DamageableTest" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6918, 0.574471, -6.61148)
+mass = 5.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DamageableTest"]
+gi_mode = 0
+mesh = SubResource("BoxMesh_hba1o")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageableTest"]
+shape = SubResource("BoxShape3D_ydv7q")
+
+[node name="Damageable" type="Node" parent="DamageableTest"]
+script = ExtResource("5_fx2o6")
+ImpactEffect = ExtResource("6_le8pm")
+
+[editable path="PlayerBody/ArmsContainer/ArmsMesh"]

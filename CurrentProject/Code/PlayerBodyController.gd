@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@export var gunEffects: WeaponEffectsController;
+
 @export var animationTree: AnimationTree;
 
 @export var HandStateMachinePlaybackPath: String;
@@ -17,7 +19,7 @@ extends CharacterBody3D
 @export var RotationSpeed: float;
 @export var CameraActualRotationSpeed: float;
 @export var ArmsActualRotationSpeed: float;
-@export var VerticalRotationLimit: float;
+@export var VerticalRotationLimit: float = 80;
 
 
 
@@ -52,14 +54,22 @@ func _input(event):
 		handStateMachinePlayback.travel(IdleAnimationName);
 	
 	if (event.is_action_pressed("Fire")):
-		if (isAiming):
-			handStateMachinePlayback.travel(AimingFireAnimationName);
-		else:
-			handStateMachinePlayback.travel(IdleFireAnimationName);
+		FireWeapon();
 	
 	if (event.is_action_pressed("Reload")):
 		isAiming = false;
 		handStateMachinePlayback.travel(ReloadAnimationName);
+
+func FireWeapon():
+	if (!gunEffects.hasRoundAvailable):
+		isAiming = false;
+		handStateMachinePlayback.travel(ReloadAnimationName);
+		return;
+	
+	if (isAiming):
+		handStateMachinePlayback.travel(AimingFireAnimationName);
+	else:
+		handStateMachinePlayback.travel(IdleFireAnimationName);
 
 func ToggleMouseMode():
 	if (Input.mouse_mode == Input.MOUSE_MODE_VISIBLE):

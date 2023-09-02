@@ -1,0 +1,215 @@
+[gd_scene load_steps=29 format=3 uid="uid://d3qcyvkf063xn"]
+
+[ext_resource type="Script" path="res://Code/Effects/GenericEffectHandler.gd" id="1_arikf"]
+[ext_resource type="Material" uid="uid://cfgyby57dioy6" path="res://Materials/SmokeEffectMaterial.tres" id="1_sojmi"]
+[ext_resource type="Shader" uid="uid://wpsu367qkgow" path="res://Shaders/ImpactEffectParticleShader.tres" id="3_7j0bc"]
+[ext_resource type="Texture2D" uid="uid://cd510quoei8en" path="res://Textures/Effects/MuzzleFlash.png" id="3_nchr7"]
+
+[sub_resource type="Gradient" id="Gradient_jby8l"]
+offsets = PackedFloat32Array(0, 0.0653409, 0.139205, 0.278409, 0.767045, 0.869318, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.986956, 0.986956, 0.986956, 0.980114, 0.9293, 0.9293, 0.9293, 0.892213, 0.91603, 0.91603, 0.91603, 0.871983, 0.791297, 0.791297, 0.791297, 0.681818, 0.344076, 0.344076, 0.344076, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ai8w1"]
+gradient = SubResource("Gradient_jby8l")
+
+[sub_resource type="Curve" id="Curve_ayjtt"]
+max_value = 2.0
+_data = [Vector2(0, 0.0105263), 0.0, 0.403157, 0, 0, Vector2(0.0835509, 0.336842), 0.806316, 0.806316, 0, 0, Vector2(0.553525, 0.968421), 1.89721, 1.89721, 0, 0, Vector2(1, 2), 0.223979, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_dien7"]
+curve = SubResource("Curve_ayjtt")
+
+[sub_resource type="Curve" id="Curve_lg8l8"]
+_data = [Vector2(0, 0), 0.0, 2.8221, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r137e"]
+curve = SubResource("Curve_lg8l8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dosjq"]
+lifetime_randomness = 0.47
+direction = Vector3(0, 0, -5)
+spread = 0.0
+gravity = Vector3(0, 0.2, 0)
+initial_velocity_min = 0.4
+initial_velocity_max = 0.5
+damping_min = 0.2
+damping_max = 1.0
+angle_min = -425.6
+angle_max = 340.5
+scale_min = 0.5
+scale_max = 1.1
+scale_curve = SubResource("CurveTexture_dien7")
+color_ramp = SubResource("GradientTexture1D_ai8w1")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 9.24
+turbulence_influence_min = 0.02
+turbulence_influence_max = 0.18
+turbulence_influence_over_life = SubResource("CurveTexture_r137e")
+anim_offset_max = 1.0
+sub_emitter_mode = 1
+sub_emitter_frequency = 4.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_gkfcl"]
+
+[sub_resource type="Gradient" id="Gradient_ys1pj"]
+offsets = PackedFloat32Array(0, 0.676136, 1)
+colors = PackedColorArray(0.621692, 0.167699, 0, 1, 0.93807, 0.547993, 3.85046e-07, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1amnt"]
+gradient = SubResource("Gradient_ys1pj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ost8d"]
+render_priority = 0
+shader = ExtResource("3_7j0bc")
+shader_parameter/UsebillboardParticle = false
+shader_parameter/EdgeYUV = 1.0
+shader_parameter/EmissionPower = 2.0
+shader_parameter/particles_anim_h_frames = 6
+shader_parameter/particles_anim_v_frames = 1
+shader_parameter/Albedo = ExtResource("3_nchr7")
+shader_parameter/ColorGradient = SubResource("GradientTexture1D_1amnt")
+
+[sub_resource type="Gradient" id="Gradient_h7tdg"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l5crm"]
+gradient = SubResource("Gradient_h7tdg")
+
+[sub_resource type="Curve" id="Curve_5o5la"]
+_data = [Vector2(0, 0.494737), 0.0, 0.0895905, 0, 0, Vector2(1, 1), 1.51184, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_on6c7"]
+curve = SubResource("Curve_5o5la")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sb2q3"]
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_on6c7")
+color_ramp = SubResource("GradientTexture1D_l5crm")
+anim_offset_max = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u6m5g"]
+size = Vector2(1, 2)
+center_offset = Vector3(0, 1, 0)
+orientation = 2
+
+[sub_resource type="Gradient" id="Gradient_4cpyb"]
+offsets = PackedFloat32Array(0, 0.119318, 0.519886, 0.755682, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.986956, 0.986956, 0.986956, 0.980114, 0.791297, 0.791297, 0.791297, 0.681818, 0.344076, 0.344076, 0.344076, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y4k58"]
+gradient = SubResource("Gradient_4cpyb")
+
+[sub_resource type="Curve" id="Curve_qe4wc"]
+_data = [Vector2(0, 0.0105263), 0.0, 0.403157, 0, 0, Vector2(1, 1), 1.8898, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lqygk"]
+curve = SubResource("Curve_qe4wc")
+
+[sub_resource type="Curve" id="Curve_mlbkk"]
+_data = [Vector2(0, 0), 0.0, 2.8221, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ki5j"]
+curve = SubResource("Curve_mlbkk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vn5mt"]
+lifetime_randomness = 0.45
+direction = Vector3(0, 0, -1)
+spread = 0.0
+gravity = Vector3(0, 0.2, 0)
+initial_velocity_min = 0.4
+initial_velocity_max = 0.5
+damping_min = 0.2
+damping_max = 1.0
+angle_min = -425.6
+angle_max = 340.5
+scale_min = 0.3
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_lqygk")
+color_ramp = SubResource("GradientTexture1D_y4k58")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 9.24
+turbulence_influence_min = 0.02
+turbulence_influence_max = 0.18
+turbulence_influence_over_life = SubResource("CurveTexture_0ki5j")
+anim_offset_max = 1.0
+sub_emitter_mode = 1
+sub_emitter_frequency = 4.0
+
+[node name="MuzzleFlashEffect" type="Node3D" node_paths=PackedStringArray("OptionalLight")]
+transform = Transform3D(0.999935, -0.0144752, 0.00158055, 0.0144765, 0.999936, -0.000876951, -0.00156776, 0.000899749, 1.00004, 0.195426, 0.265459, -0.839902)
+script = ExtResource("1_arikf")
+OptionalLight = NodePath("MuzzleFlash")
+LightDuration = 0.2
+
+[node name="SmokeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 5.42627e-10, 0, -4.33829e-10, 1, 0, 0, -5.82077e-11, 1, 0, 0, 0)
+material_override = ExtResource("1_sojmi")
+cast_shadow = 0
+emitting = false
+lifetime = 6.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.36
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_dosjq")
+draw_pass_1 = SubResource("QuadMesh_gkfcl")
+
+[node name="MuzzleFire1" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.686262, 0.00104489, 0.7272, -0.727196, -0.00262972, 0.686262, 0.00262973, -0.999884, -0.00104495, 1.90735e-06, 5.96046e-07, 0)
+material_override = SubResource("ShaderMaterial_ost8d")
+emitting = false
+amount = 3
+lifetime = 0.1
+one_shot = true
+local_coords = true
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_sb2q3")
+draw_pass_1 = SubResource("PlaneMesh_u6m5g")
+
+[node name="MuzzleFire2" type="GPUParticles3D" parent="."]
+transform = Transform3D(-0.727198, -0.000162662, 0.686264, -0.686264, -0.000377087, -0.727198, 0.000377051, -0.999887, 0.000162703, 2.93553e-06, 3.27826e-07, 0)
+material_override = SubResource("ShaderMaterial_ost8d")
+emitting = false
+amount = 3
+lifetime = 0.1
+one_shot = true
+local_coords = true
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_sb2q3")
+draw_pass_1 = SubResource("PlaneMesh_u6m5g")
+
+[node name="MuzzleFire3" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 2.29223e-08, 4.74975e-08, 7.95683e-09, 1, -1.3737e-08, 9.19681e-09, -1.78698e-08, 0.999998, 2.11895e-05, -1.20699e-05, -0.0134969)
+material_override = ExtResource("1_sojmi")
+cast_shadow = 0
+emitting = false
+amount = 16
+lifetime = 0.18
+one_shot = true
+explosiveness = 1.0
+randomness = 0.36
+local_coords = true
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_vn5mt")
+draw_pass_1 = SubResource("QuadMesh_gkfcl")
+
+[node name="MuzzleFlash" type="OmniLight3D" parent="."]
+transform = Transform3D(0.999948, 0.00463229, -0.000500923, -0.00463237, 0.999948, -0.000354135, 0.000499348, 0.00035644, 0.999958, 2.262e-05, -1.29342e-05, -0.0144297)
+light_color = Color(0.776471, 0.529412, 0.27451, 1)
+light_energy = 0.5
+light_indirect_energy = 4.749
+light_volumetric_fog_energy = 1.365
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 2.63902
