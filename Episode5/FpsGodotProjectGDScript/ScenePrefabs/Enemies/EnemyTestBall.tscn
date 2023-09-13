@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwcnle3ym06qj"]
+
+[ext_resource type="Script" path="res://Code/Enemies/BasicEnemyNavigationAgent.gd" id="1_7k7id"]
+[ext_resource type="Script" path="res://Code/Enemies/Damageable.gd" id="2_w0twi"]
+[ext_resource type="PackedScene" uid="uid://cfgwxv8foypvp" path="res://ScenePrefabs/Effects/ImpactEffectEnemy.tscn" id="3_q8xyc"]
+[ext_resource type="Script" path="res://Code/Enemies/LimbPlacementController.gd" id="4_q8prw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_qq31b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_smown"]
+
+[node name="EnemyTest" type="RigidBody3D" node_paths=PackedStringArray("NavigationAgent")]
+mass = 2.0
+gravity_scale = 0.8
+angular_damp = 0.3
+script = ExtResource("1_7k7id")
+MaximumVelocity = 25.0
+VelocityChange = 25.0
+NavigationAgent = NodePath("NavigationAgent3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+gi_mode = 0
+mesh = SubResource("SphereMesh_qq31b")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_smown")
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("2_w0twi")
+ImpactEffect = ExtResource("3_q8xyc")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+
+[node name="LimbPlacementController" type="Node" parent="." node_paths=PackedStringArray("EnemyBody", "LimbRaycast")]
+script = ExtResource("4_q8prw")
+EnemyBody = NodePath("..")
+LimbRaycast = NodePath("../LimbPlacementRaycast")
+
+[node name="LimbPlacementRaycast" type="RayCast3D" parent="."]
