@@ -1,5 +1,0 @@
-res://Scenes/TestScene.tscn
-res://Materials/ArmsMaterial.tres
-res://Materials/HandsMaterial.tres
-res://ScenePrefabs/ArmsPrefab.tscn
-res://Code/PlayerBodyController.gd

@@ -1,9 +1,0 @@
-res://ScenePrefabs/ArmsPrefab.tscn
-res://Meshes/Arms/Animations/FiringLowered1.res
-res://Meshes/Arms/Animations/FiringRaised1.res
-res://Meshes/Arms/Animations/Reloading.res
-res://Materials/ArmsMaterial.tres
-res://Materials/HandsMaterial.tres
-res://Shaders/SmokeParticleShader.tres
-res://Shaders/ImpactEffectParticleShader.tres
-res://ScenePrefabs/Enviroments/BaseEnviromentResource.tres
