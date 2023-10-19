@@ -3,15 +3,18 @@ class_name LimbPlacementController
 
 @export var Skeleton: Skeleton3D;
 @export var ChestBone: PhysicalBone3D;
+@export var HeadIKSolver: SkeletonIK3D;
 
 @export var ChestTargetPoint: Node3D;
 @export var ChestTargetContainer: Node3D;
+@export var HeadTargetContainer: Node3D;
 
 @export var JumpVelocity: float = 1.5;
 @export var StepBouncePower: float = 1.5;
 @export var TorsoBounceVisualStrength: float = 1.5;
 @export var TorsoLerpSpeed: float = 1.5;
 @export var TorsoRotationLerpSpeed: float = 1.5;
+@export var HeadRotationLerpSpeed: float = 3;
 
 @export var EnemyBody: BasicEnemyNavigationAgent;
 @export var LimbRaycast: RayCast3D;
@@ -35,7 +38,14 @@ var CurrentTorsoOffset: Vector3 = Vector3.ZERO;
 var ChestBoneID: int;
 
 func _ready():
+	var rng = RandomNumberGenerator.new();
+	rng.randomize()
+	
+	CurrentLimbStepDelayTimer = rng.randf_range(0, MinimumLimbStepDelay);
+	CurrentLimbIndex = rng.randf_range(0, CurrentLimbs.size() - 1);
+	
 	ChestBoneID = ChestBone.get_bone_id();
+	HeadIKSolver.start();
 	
 	LimbRaycast.target_position = Vector3(0,0,-TargetOffsetDown);
 	
@@ -59,13 +69,14 @@ func _physics_process(delta):
 	CurrentTorsoOffset = Vector3.DOWN * countval * TorsoBounceVisualStrength;
 	
 	UpdateBodyPositions(delta)
+	UpdateHeadPosition(delta)
 
 func KickOffVelocity(desiredDirection: Vector3, targetPoint: Vector3):
 	var currentVelocity: float = JumpVelocity;
 	if (EnemyBody.linear_velocity.dot(EnemyBody.DesiredVelocity) < 0):
 		currentVelocity *= EnemyBody.DesiredVelocity.length() * VelocityAccountingMultiplier;
 	
-	EnemyBody.apply_impulse(desiredDirection * currentVelocity + (ChestTargetContainer.global_transform.basis.y * StepBouncePower), EnemyBody.to_local(targetPoint));
+	EnemyBody.apply_impulse(desiredDirection * currentVelocity + (ChestTargetContainer.global_transform.basis.y * StepBouncePower) - EnemyBody.linear_velocity, EnemyBody.to_local(targetPoint));
 
 func UpdateBodyPositions(delta: float):
 	ChestTargetContainer.global_position.x = EnemyBody.global_position.x;
@@ -86,6 +97,19 @@ func UpdateBodyPositions(delta: float):
 	Skeleton.global_position = ChestTargetContainer.global_position;
 	Skeleton.set_bone_pose_position(ChestBoneID, Skeleton.to_local(ChestTargetPoint.global_position));
 	Skeleton.set_bone_pose_rotation(ChestBoneID, ChestTargetPoint.global_transform.basis.get_rotation_quaternion());
+
+func UpdateHeadPosition(delta: float):
+	HeadTargetContainer.global_position = ChestTargetContainer.global_position;
+	
+	var targetLookAtPoint: Vector3 = EnemyBody.PlayerTarget.global_position if EnemyBody.PlayerTarget != null else ChestTargetContainer.global_position + LastVelocity;
+	var targetRotation: Vector3 = HeadTargetContainer.global_transform.looking_at(targetLookAtPoint, 
+		Vector3.UP if abs(ChestTargetContainer.global_transform.basis.y.dot(targetLookAtPoint - HeadTargetContainer.global_position)) > 0.99 else ChestTargetContainer.global_transform.basis.y).basis.get_euler();
+	
+	HeadTargetContainer.global_rotation.x = lerp_angle(HeadTargetContainer.global_rotation.x, targetRotation.x, delta * HeadRotationLerpSpeed);
+	HeadTargetContainer.global_rotation.y = lerp_angle(HeadTargetContainer.global_rotation.y, targetRotation.y, delta * HeadRotationLerpSpeed);
+	HeadTargetContainer.global_rotation.z = lerp_angle(HeadTargetContainer.global_rotation.z, targetRotation.z, delta * HeadRotationLerpSpeed);
+	
+	HeadIKSolver.interpolation = ((-ChestTargetContainer.global_transform.basis.z).dot(targetLookAtPoint - HeadTargetContainer.global_position) + 1) / 2;
 
 func GetTargetLimbPosition(targetLimb: LimbReference.LimbEnum):
 	var targetPosition = EnemyBody.global_position + ChestTargetContainer.global_transform.basis.y;
@@ -110,7 +134,7 @@ func GetTargetLimbPosition(targetLimb: LimbReference.LimbEnum):
 	LimbRaycast.force_raycast_update();
 	
 	var hitSurface = LimbRaycast.is_colliding();
-	var hitNormal = Vector3.UP;
+	var hitNormal = ChestTargetContainer.global_transform.basis.y;
 	if hitSurface:
 		targetPosition = LimbRaycast.get_collision_point();
 		hitNormal = LimbRaycast.get_collision_normal();
