@@ -1,0 +1,31 @@
+[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://djk0r1lrupuub"]
+
+[ext_resource type="Shader" uid="uid://dspgwv2qr2cmj" path="res://Shaders/Enviroments/RubbleShader.tres" id="1_avva7"]
+[ext_resource type="Texture2D" uid="uid://h302hv0k21he" path="res://Textures/Enviroment/Gravel2_Albedo.png" id="2_4omw8"]
+[ext_resource type="Texture2D" uid="uid://d0jit0jqtl8ep" path="res://Textures/Enviroment/Gravel2_Normals.png" id="3_kfkl4"]
+[ext_resource type="Texture2D" uid="uid://k2wb5io8drj7" path="res://Textures/Enviroment/Gravel2_Roughness.png" id="4_y26le"]
+[ext_resource type="Texture2D" uid="uid://cfxp46obg8leb" path="res://Textures/Enviroment/RubblePiles/RubblePiles1_GroundMask.png" id="5_gbgl1"]
+[ext_resource type="Texture2D" uid="uid://bc12a24cxduya" path="res://Textures/Enviroment/RubblePiles/RubblePiles1_normals.png" id="6_drcj7"]
+[ext_resource type="Texture2D" uid="uid://u5bujcv3124o" path="res://Textures/Enviroment/Rock1_Albedo.png" id="7_xxqg3"]
+[ext_resource type="Texture2D" uid="uid://cvns08wc6od2t" path="res://Textures/Enviroment/Rock1_Normals.png" id="8_y75ae"]
+[ext_resource type="Texture2D" uid="uid://dojppdsgbqmq7" path="res://Textures/Enviroment/Rock1_Roughness.png" id="9_id8ne"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_avva7")
+shader_parameter/TriPlanerScaleHard = Vector3(0.25, 0.25, 0.25)
+shader_parameter/RockTint = Color(0.52549, 0.592157, 0.784314, 1)
+shader_parameter/RoughnessMult = 1.0
+shader_parameter/DetailNormalPower = 0.45
+shader_parameter/NormalMapPower = 2.0
+shader_parameter/triplanar_scale = Vector3(0.25, 0.25, 0.25)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 2.0
+shader_parameter/RockAlbedoTriplanar = ExtResource("7_xxqg3")
+shader_parameter/BaseAlbedoTriplanar = ExtResource("2_4omw8")
+shader_parameter/GroundMask = ExtResource("5_gbgl1")
+shader_parameter/RockRoughnessTriplanar = ExtResource("9_id8ne")
+shader_parameter/BaseRoughnessTriplanar = ExtResource("4_y26le")
+shader_parameter/NormalMap = ExtResource("6_drcj7")
+shader_parameter/RockNormalTriplanar = ExtResource("8_y75ae")
+shader_parameter/BaseNormalTriplanar = ExtResource("3_kfkl4")

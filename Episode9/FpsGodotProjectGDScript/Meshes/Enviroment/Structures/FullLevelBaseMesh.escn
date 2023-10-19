@@ -1,0 +1,20 @@
+[gd_scene load_steps=1 format=2]
+
+[sub_resource id=1 type="Curve3D"]
+
+resource_name = "BezierCurve001"
+_data = {
+	"points":PoolVector3Array(0.00489211, 0.624346, 0.00129801, -0.00277019, -0.353542, -0.00073501, 3.44495, 0.32057, 0.0, 0.00157261, -20.7545, -0.000598736, -0.000786304, 10.3772, 0.000299368, 3.43726, 27.6156, 0.0192955, -0.000396013, -7.88019, 0.00688918, 0.000396013, 7.8802, -0.00688919, 3.43652, 69.9691, 0.0228543, -0.00216794, -0.200478, 0.00082997, 0.010813, 0.999916, -0.00413962, 3.44022, 83.3858, 0.0119454),
+	"tilts":PoolRealArray(0.0, 0.0, 0.0, 0.0)
+}
+
+[node type="Spatial" name="Scene"]
+
+[node name="RailsCurve" type="Path" parent="."]
+
+transform = Transform(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0)
+curve = SubResource(1)
+
+[node name="RailsCurve" type="MeshInstance" parent="RailsCurve"]
+
+transform = Transform(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0)
