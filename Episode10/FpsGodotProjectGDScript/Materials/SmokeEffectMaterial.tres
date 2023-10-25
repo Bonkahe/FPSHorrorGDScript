@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cfgyby57dioy6"]
+
+[ext_resource type="Shader" uid="uid://btaackcb4gvc1" path="res://Shaders/SmokeParticleShader.tres" id="1_pxoak"]
+[ext_resource type="Texture2D" uid="uid://c8rcj34r06qo2" path="res://Textures/Effects/Explosion.png" id="2_mtj1x"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_pxoak")
+shader_parameter/TimeSpeed = 0.5
+shader_parameter/EdgeSharpness = 0.388
+shader_parameter/ProxFadeDistance = 0.75
+shader_parameter/AlphaBaseSub = 0.99
+shader_parameter/SmokeTexture = ExtResource("2_mtj1x")

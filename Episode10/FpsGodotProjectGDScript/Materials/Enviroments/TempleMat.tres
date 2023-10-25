@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://c2wqay3a2wvr1"]
+
+[ext_resource type="Shader" uid="uid://i3lirco65w8g" path="res://Shaders/Enviroments/TempleWallShader.tres" id="1_xhqqw"]
+[ext_resource type="Texture2D" uid="uid://u5bujcv3124o" path="res://Textures/Enviroment/Rock1_Albedo.png" id="2_aiqhq"]
+[ext_resource type="Texture2D" uid="uid://cxg2rq12ibpo7" path="res://Textures/Enviroment/Temple/TempleFlowMap.png" id="3_2ob7f"]
+[ext_resource type="Texture2D" uid="uid://dqgbaxpfd5g6g" path="res://Textures/Enviroment/Temple/TempleWall_NormalMap.png" id="4_bjllr"]
+[ext_resource type="Texture2D" uid="uid://dojppdsgbqmq7" path="res://Textures/Enviroment/Rock1_Roughness.png" id="5_atg1j"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xhqqw")
+shader_parameter/FlowSpeed = 0.1
+shader_parameter/FlowStrength = -3.0
+shader_parameter/AlbedoTint = Color(0.47451, 0.627451, 0.803922, 1)
+shader_parameter/WallFlowMap = ExtResource("3_2ob7f")
+shader_parameter/WallAlbedo = ExtResource("2_aiqhq")
+shader_parameter/WallRoughness = ExtResource("5_atg1j")
+shader_parameter/WallNormalMap = ExtResource("4_bjllr")

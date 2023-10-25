@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3 uid="uid://2qlb88t2j58o"]
+
+[ext_resource type="PackedScene" uid="uid://cqposrf6p5qmy" path="res://Meshes/Enviroment/Details/Lantern.gltf" id="1_7hlv8"]
+[ext_resource type="Material" uid="uid://bsi6ubcout0n0" path="res://Materials/Enviroments/railsMat.tres" id="2_wdsff"]
+
+[sub_resource type="Gradient" id="Gradient_xsf4b"]
+offsets = PackedFloat32Array(0, 0.364486, 1)
+colors = PackedColorArray(0.182965, 0.182965, 0.182965, 1, 0.500503, 0.500503, 0.500503, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tkrsn"]
+frequency = 0.013
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_18h6d"]
+in_3d_space = true
+seamless = true
+as_normal_map = true
+bump_strength = 5.6
+color_ramp = SubResource("Gradient_xsf4b")
+noise = SubResource("FastNoiseLite_tkrsn")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tm8ch"]
+load_path = "res://.godot/imported/RustyMetalRoughness.png-7f35ae3356f11aa0e9de22fec8f85956.bptc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpopn"]
+cull_mode = 2
+albedo_color = Color(0.360784, 0.329412, 0.301961, 1)
+metallic = 0.95
+roughness = 0.38
+roughness_texture = SubResource("CompressedTexture2D_tm8ch")
+normal_enabled = true
+normal_scale = 0.14
+normal_texture = SubResource("NoiseTexture2D_18h6d")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbtee"]
+albedo_color = Color(0.733333, 0.498039, 0.188235, 1)
+emission_enabled = true
+emission = Color(0.764706, 0.435294, 0.14902, 1)
+emission_energy_multiplier = 32.0
+
+[sub_resource type="Gradient" id="Gradient_ag3ld"]
+offsets = PackedFloat32Array(0, 0.364486, 1)
+colors = PackedColorArray(0.182965, 0.182965, 0.182965, 1, 0.500503, 0.500503, 0.500503, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4s1fg"]
+frequency = 0.013
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qgu8t"]
+in_3d_space = true
+seamless = true
+as_normal_map = true
+bump_strength = 5.6
+color_ramp = SubResource("Gradient_ag3ld")
+noise = SubResource("FastNoiseLite_4s1fg")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vyub6"]
+load_path = "res://.godot/imported/RustyMetalRoughness.png-7f35ae3356f11aa0e9de22fec8f85956.bptc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbw1b"]
+transparency = 1
+albedo_color = Color(0.321569, 0.337255, 0.384314, 0.501961)
+metallic = 1.0
+roughness = 0.42
+roughness_texture = SubResource("CompressedTexture2D_vyub6")
+normal_texture = SubResource("NoiseTexture2D_qgu8t")
+uv1_triplanar = true
+
+[node name="Lantern" instance=ExtResource("1_7hlv8")]
+
+[node name="Lantern2" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xpopn")
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lantern2" index="0"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.563128, 0)
+light_color = Color(0.639216, 0.439216, 0.290196, 1)
+light_volumetric_fog_energy = 10.0
+light_size = 0.055
+shadow_enabled = true
+shadow_blur = 1.162
+omni_range = 35.696
+omni_attenuation = 1.51572
+
+[node name="Lantern_001" parent="." index="1"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_mbtee")
+surface_material_override/1 = SubResource("StandardMaterial3D_wbw1b")
+
+[node name="LanternChain" parent="." index="2"]
+transform = Transform3D(0, 0.0178449, 0.0214531, 0, 0.0214531, -0.0178449, -0.0279047, 0, 0, 0, 0.663407, 0)
+surface_material_override/0 = ExtResource("2_wdsff")

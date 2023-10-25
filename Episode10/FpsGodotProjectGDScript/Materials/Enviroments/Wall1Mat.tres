@@ -1,0 +1,29 @@
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://ctvb4okpbspvw"]
+
+[ext_resource type="Shader" uid="uid://chme55bh5wcl2" path="res://Shaders/Enviroments/WallShader.tres" id="1_vkbc2"]
+[ext_resource type="Texture2D" uid="uid://dtosnh8smninv" path="res://Textures/Enviroment/Rock2_Albedo.png" id="2_qx37c"]
+[ext_resource type="Texture2D" uid="uid://7jpjqvypy7ud" path="res://Textures/Enviroment/Rock2_Normals.png" id="3_tnqoa"]
+[ext_resource type="Texture2D" uid="uid://td6udqq4ifuy" path="res://Textures/Enviroment/Rock2_Roughness.png" id="4_83ach"]
+[ext_resource type="Texture2D" uid="uid://u5bujcv3124o" path="res://Textures/Enviroment/Rock1_Albedo.png" id="5_sqjeo"]
+[ext_resource type="Texture2D" uid="uid://cvns08wc6od2t" path="res://Textures/Enviroment/Rock1_Normals.png" id="6_wusf4"]
+[ext_resource type="Texture2D" uid="uid://dojppdsgbqmq7" path="res://Textures/Enviroment/Rock1_Roughness.png" id="7_67n7j"]
+[ext_resource type="Texture2D" uid="uid://ccm67ow5hl8gm" path="res://Textures/Enviroment/Wall1_normals.png" id="11_pc8s4"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_vkbc2")
+shader_parameter/Tint = Color(0.52549, 0.592157, 0.784314, 1)
+shader_parameter/HeightMixMult = 0.4
+shader_parameter/NormalMapTypeBlend = 0.45
+shader_parameter/NormalMapPower = 2.679
+shader_parameter/triplanar_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 3.955
+shader_parameter/BandAlbedo = ExtResource("2_qx37c")
+shader_parameter/BaseAlbedo = ExtResource("5_sqjeo")
+shader_parameter/HeightMix = ExtResource("4_83ach")
+shader_parameter/BandRoughness = ExtResource("4_83ach")
+shader_parameter/BaseRoughness = ExtResource("7_67n7j")
+shader_parameter/WallNormalMap = ExtResource("11_pc8s4")
+shader_parameter/BandNormal = ExtResource("3_tnqoa")
+shader_parameter/BaseNormal = ExtResource("6_wusf4")
