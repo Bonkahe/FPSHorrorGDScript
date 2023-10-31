@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjv46g3dfg60a"]
+
+[ext_resource type="Material" uid="uid://bfgslqbysv7mc" path="res://Materials/Enviroments/FlowerPetalParticles.tres" id="1_vnl3h"]
+
+[sub_resource type="Gradient" id="Gradient_t8ysq"]
+offsets = PackedFloat32Array(0, 0.189802, 0.730878, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p0mfd"]
+gradient = SubResource("Gradient_t8ysq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0ke23"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 20)
+damping_min = 4.0
+damping_max = 8.0
+scale_min = 0.8
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_p0mfd")
+turbulence_enabled = true
+turbulence_noise_scale = 5.76
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iwvoa"]
+size = Vector2(0.2, 0.2)
+orientation = 2
+
+[node name="FlowerpetalsParticles" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.18311, 0)
+material_override = ExtResource("1_vnl3h")
+amount = 250
+lifetime = 15.0
+preprocess = 15.0
+visibility_aabb = AABB(-27.1491, -48.2284, -23.6184, 48.6155, 58.4165, 46.8525)
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_0ke23")
+draw_pass_1 = SubResource("PlaneMesh_iwvoa")

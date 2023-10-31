@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://b16stv3acybbm"]
+
+[ext_resource type="Texture2D" uid="uid://b3jc0hygcwojp" path="res://Textures/Arms/Arms_Albedo.png" id="1_btt78"]
+[ext_resource type="Texture2D" uid="uid://b7g4iopolqo7f" path="res://Textures/Arms/Arms_NormalMap.png" id="2_88rw1"]
+[ext_resource type="Texture2D" uid="uid://dk6onp8ta4r5s" path="res://Textures/Arms/Arms_Roughness.png" id="3_36fm1"]
+[ext_resource type="Texture2D" uid="uid://cpgl31nnst3dd" path="res://Textures/Arms/Arms_SubSurfaceScattering.png" id="4_gdk6s"]
+
+[resource]
+albedo_texture = ExtResource("1_btt78")
+metallic_specular = 0.44
+roughness_texture = ExtResource("3_36fm1")
+normal_enabled = true
+normal_texture = ExtResource("2_88rw1")
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 0.37
+subsurf_scatter_skin_mode = true
+subsurf_scatter_texture = ExtResource("4_gdk6s")
+backlight_texture = ExtResource("4_gdk6s")

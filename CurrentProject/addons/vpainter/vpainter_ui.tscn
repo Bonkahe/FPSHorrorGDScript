@@ -1,0 +1,197 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnbh74s0r84t8"]
+
+[ext_resource type="Script" path="res://addons/vpainter/vpainter_ui.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cydfpougd46l3" path="res://addons/vpainter/res/icons/icon_fill.svg" id="2"]
+[ext_resource type="Texture2D" uid="uid://cxx4whlrmiy4e" path="res://addons/vpainter/res/icons/icon_blur.svg" id="3"]
+[ext_resource type="Texture2D" uid="uid://c3jlpa6vk3kji" path="res://addons/vpainter/res/icons/icon_brush.svg" id="4"]
+[ext_resource type="Texture2D" uid="uid://crev2e7nrpe3s" path="res://addons/vpainter/res/icons/icon_pick.svg" id="5"]
+[ext_resource type="Texture2D" uid="uid://cff0q3wjjrdyw" path="res://addons/vpainter/res/icons/icon_displace.svg" id="6"]
+[ext_resource type="Texture2D" uid="uid://diy23js6ij3ju" path="res://addons/vpainter/res/icons/icon_duplicate.svg" id="10"]
+
+[node name="ui" type="Control" node_paths=PackedStringArray("color_picker_dir_highlight", "background_picker_dir_highlight")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+local_copy_button_path = NodePath("DuplicateButton")
+color_picker_dir = NodePath("MainArea/ColorSwatches/ColorRectHighlight/ColorPickerButton")
+background_picker_dir = NodePath("MainArea/ColorSwatches/ColorRectHighlight2/ColorPickerButton2")
+color_picker_dir_highlight = NodePath("MainArea/ColorSwatches/ColorRectHighlight")
+background_picker_dir_highlight = NodePath("MainArea/ColorSwatches/ColorRectHighlight2")
+pen_pressure_settings_dir = NodePath("MainArea/PenPressureSettings")
+button_opacity_pressure_dir = NodePath("MainArea/PenPressureSettings/BtnOpacityPressure")
+button_size_pressure_dir = NodePath("MainArea/PenPressureSettings/BtnSizePressure")
+button_paint_dir = NodePath("MainArea/Tools_1/BtnBrush")
+button_sample_dir = NodePath("MainArea/Tools_1/BtnSample")
+button_blur_dir = NodePath("MainArea/Tools_2/BtnBlur")
+button_displace_dir = NodePath("MainArea/Tools_2/BtnDisplace")
+button_fill_dir = NodePath("MainArea/Tools_2/BtnFill")
+brush_size_slider_dir = NodePath("MainArea/Sliders/Size")
+brush_opacity_slider_dir = NodePath("MainArea/Sliders/Opacity")
+brush_hardness_slider_dir = NodePath("MainArea/Sliders/Hardness")
+brush_spacing_slider_dir = NodePath("MainArea/Sliders/Spacing")
+blend_modes_path = NodePath("MainArea/BlendModes")
+
+[node name="MainArea" type="VBoxContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Tools_1" type="HBoxContainer" parent="MainArea"]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnBrush" type="Button" parent="MainArea/Tools_1"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+icon = ExtResource("4")
+
+[node name="BtnSample" type="Button" parent="MainArea/Tools_1"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("5")
+
+[node name="Tools_2" type="HBoxContainer" parent="MainArea"]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnBlur" type="Button" parent="MainArea/Tools_2"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("3")
+
+[node name="BtnDisplace" type="Button" parent="MainArea/Tools_2"]
+visible = false
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("6")
+
+[node name="BtnFill" type="Button" parent="MainArea/Tools_2"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("2")
+
+[node name="PenPressureSettings" type="VBoxContainer" parent="MainArea"]
+layout_mode = 2
+
+[node name="BtnSizePressure" type="CheckBox" parent="MainArea/PenPressureSettings"]
+layout_mode = 2
+text = "SizePressure"
+
+[node name="BtnOpacityPressure" type="CheckBox" parent="MainArea/PenPressureSettings"]
+layout_mode = 2
+text = "OpacityPressure"
+
+[node name="ColorSwatches" type="HBoxContainer" parent="MainArea"]
+layout_mode = 2
+alignment = 1
+
+[node name="ColorRectHighlight" type="ColorRect" parent="MainArea/ColorSwatches"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(1, 1, 1, 0.490196)
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MainArea/ColorSwatches/ColorRectHighlight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+flat = true
+
+[node name="ColorRectHighlight2" type="ColorRect" parent="MainArea/ColorSwatches"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="ColorPickerButton2" type="ColorPickerButton" parent="MainArea/ColorSwatches/ColorRectHighlight2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+flat = true
+color = Color(1, 1, 1, 1)
+
+[node name="BlendModes" type="OptionButton" parent="MainArea"]
+layout_mode = 2
+size_flags_horizontal = 4
+item_count = 5
+selected = 0
+popup/item_0/text = "MIX"
+popup/item_0/id = 0
+popup/item_1/text = "ADD"
+popup/item_1/id = 1
+popup/item_2/text = "SUBTRACT"
+popup/item_2/id = 2
+popup/item_3/text = "MULTIPLY"
+popup/item_3/id = 3
+popup/item_4/text = "DIVIDE"
+popup/item_4/id = 4
+
+[node name="Sliders" type="VBoxContainer" parent="MainArea"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="LSize" type="Label" parent="MainArea/Sliders"]
+layout_mode = 2
+text = "size:"
+
+[node name="Size" type="HSlider" parent="MainArea/Sliders"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.001
+max_value = 10.0
+step = 0.001
+value = 1.0
+
+[node name="LOpacity" type="Label" parent="MainArea/Sliders"]
+layout_mode = 2
+text = "opacity:"
+
+[node name="Opacity" type="HSlider" parent="MainArea/Sliders"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.001
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[node name="LHardness" type="Label" parent="MainArea/Sliders"]
+layout_mode = 2
+text = "hardness:"
+
+[node name="Hardness" type="HSlider" parent="MainArea/Sliders"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.001
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[node name="LSpacing" type="Label" parent="MainArea/Sliders"]
+layout_mode = 2
+text = "spacing:"
+
+[node name="Spacing" type="HSlider" parent="MainArea/Sliders"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="DuplicateButton" type="Button" parent="."]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+icon = ExtResource("10")

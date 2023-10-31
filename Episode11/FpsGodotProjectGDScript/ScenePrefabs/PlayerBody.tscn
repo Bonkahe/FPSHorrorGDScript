@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://clxx6psfl5py8"]
+
+[ext_resource type="Script" path="res://Code/PlayerBodyController.gd" id="1_ihx5p"]
+[ext_resource type="PackedScene" uid="uid://cbkuu0rnihxcb" path="res://ScenePrefabs/ArmsPrefab.tscn" id="2_rc0bo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uioy7"]
+
+[node name="PlayerBody" type="CharacterBody3D" node_paths=PackedStringArray("gunEffects", "animationTree", "CameraNode", "ArmsNode")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.28412, 0.668381, 0)
+collision_layer = 2
+floor_max_angle = 1.0472
+script = ExtResource("1_ihx5p")
+gunEffects = NodePath("ArmsContainer/ArmsMesh/WeaponEffectsController")
+animationTree = NodePath("ArmsContainer/ArmsMesh/AnimationTree")
+HandStateMachinePlaybackPath = "parameters/playback"
+IdleAnimationName = "LowIdle"
+AimingAnimationName = "AimingIdle"
+IdleFireAnimationName = "Lowfire"
+AimingFireAnimationName = "Aimingfire"
+IdleReloadAnimationName = "Lowreload"
+AimingReloadAnimationName = "Aimingreload"
+CameraNode = NodePath("Camera3D")
+ArmsNode = NodePath("ArmsContainer")
+RotationSpeed = 0.3
+CameraActualRotationSpeed = 20.0
+ArmsActualRotationSpeed = 12.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_uioy7")
+
+[node name="ArmsContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+
+[node name="ArmsMesh" parent="ArmsContainer" instance=ExtResource("2_rc0bo")]
+
+[node name="WeaponEffectsController" parent="ArmsContainer/ArmsMesh" index="3" node_paths=PackedStringArray("CameraNode")]
+CameraNode = NodePath("../../../Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+current = true
+fov = 60.0
+
+[editable path="ArmsContainer/ArmsMesh"]
+[editable path="ArmsContainer/ArmsMesh/Player_Rig/Skeleton3D/LeftHandItemAttachment/FlashlightMesh"]
