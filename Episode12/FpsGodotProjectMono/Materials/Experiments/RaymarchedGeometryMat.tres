@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cemu4hl3f4ffh"]
+
+[ext_resource type="Shader" path="res://Shaders/Experiments/Raymarch.gdshader" id="1_7cxqq"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7cxqq")
+shader_parameter/SURFACE_DST = 0.01
+shader_parameter/MAX_STEPS = 12
+shader_parameter/MAX_DISTANCE = 256.0
+shader_parameter/NORMAL_STEP = 0.5
+shader_parameter/noise_scale = 1.0
+shader_parameter/noise_transform = Vector3(0, 0, 0)
+shader_parameter/density_threshold = 0.5
+shader_parameter/deformation = 0.0
+shader_parameter/anim_speed = 0.0
+shader_parameter/max_mandelbrot_dist = 1.5
+shader_parameter/mandelbrot_steps = 8
+shader_parameter/madelbrot_originscale = 1.0
+shader_parameter/MARCHINGSTEP = 0.1
+shader_parameter/mandelbrot_color = Color(0.345098, 0.215686, 0.0392157, 1)
+shader_parameter/mandelbrot_a_color = Color(0.301961, 0.313726, 0.0666667, 1)
+shader_parameter/mandelbrot_noisecontrol_color = Color(0.01, 0.01, 0.01, 1)
+shader_parameter/roughness = 0.703
+shader_parameter/specular = 0.245

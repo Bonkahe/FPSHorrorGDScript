@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1hdrc7dvu8o6"]
+
+[ext_resource type="PackedScene" uid="uid://bg4pruhdb06hu" path="res://Meshes/Enviroment/RailCart.gltf" id="1_5n875"]
+[ext_resource type="Material" uid="uid://cqf46tqugu5sa" path="res://Materials/Enviroments/RailCartBands.tres" id="2_nv2u1"]
+[ext_resource type="Material" uid="uid://bog6llmlmsfc6" path="res://Materials/Enviroments/RailCartWood.tres" id="2_qoyeq"]
+[ext_resource type="Material" uid="uid://wudmugws7fj7" path="res://Materials/Enviroments/RailCartWheels.tres" id="3_c1gnb"]
+[ext_resource type="Material" uid="uid://80wby7sv3pkn" path="res://Materials/Enviroments/Coal1Mat.tres" id="4_w1yyw"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yj138"]
+points = PackedVector3Array(-0.862315, 0.876349, -0.873015, 0.878223, 1.51106, 0.8679, 0.831905, 1.50176, 0.920375, 0.525703, 0.261113, 0.870801, 0.54949, 0.402062, -1.1169, -0.8872, 1.50583, 0.86006, 0.884672, 1.51556, -0.911107, -0.537377, 0.298862, 0.99126, -0.839942, 1.52826, -0.883107, -0.538397, 0.297718, -1.06344, 0.826462, 0.845085, -0.853999, 0.523417, 0.263815, -0.969627, -0.841545, 0.845163, 0.813563, 0.54949, 0.435875, 1.0467, 0.825425, 0.845143, 0.814117, -0.160119, 0.232997, 0.945258, -0.831478, 1.52179, 0.901159, 0.853784, 1.55132, -0.812355, -0.56596, 0.402062, -1.1169, -0.56596, 0.435875, 1.0467, -0.507787, 0.263815, -0.969627, -0.884011, 1.5036, -0.8943, -0.160119, 0.26681, 1.0467, -0.511227, 0.259488, 0.905862, 0.530879, 0.287679, -1.0808, 0.5378, 0.313023, 1.02403, 0.823808, 0.973814, 0.911167, -0.839909, 0.973528, 0.910748, 0.617014, 1.55144, -0.812567, 0.528948, 0.289845, 0.97422)
+
+[node name="RailCart" instance=ExtResource("1_5n875")]
+
+[node name="WoodenParts" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_qoyeq")
+surface_material_override/1 = ExtResource("2_qoyeq")
+
+[node name="MetalParts" parent="." index="1"]
+surface_material_override/0 = ExtResource("2_nv2u1")
+surface_material_override/1 = ExtResource("3_c1gnb")
+
+[node name="Coal" parent="." index="2"]
+surface_material_override/0 = ExtResource("4_w1yyw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0189815, 0)
+shape = SubResource("ConvexPolygonShape3D_yj138")
