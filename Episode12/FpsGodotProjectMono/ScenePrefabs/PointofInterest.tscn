@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://j77k7mguihs6"]
-
-[ext_resource type="Script" path="res://Code/Helpers/FlashlightPoint.cs" id="1_0ooma"]
-
-[node name="FlashlightPoint" type="Marker3D" groups=["FlashlightPoints"]]
-script = ExtResource("1_0ooma")
