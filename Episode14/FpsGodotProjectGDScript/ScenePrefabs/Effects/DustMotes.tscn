@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://b1q5ius1kk33c"]
+
+[sub_resource type="Gradient" id="Gradient_hdfg1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lkbbv"]
+gradient = SubResource("Gradient_hdfg1")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqiro"]
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.0588235)
+albedo_texture = SubResource("GradientTexture2D_lkbbv")
+metallic = 1.0
+metallic_specular = 1.0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+proximity_fade_enabled = true
+distance_fade_mode = 1
+distance_fade_min_distance = 50.0
+distance_fade_max_distance = 30.0
+
+[sub_resource type="Gradient" id="Gradient_lx40w"]
+offsets = PackedFloat32Array(0, 0.272321, 0.629464, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c1s4f"]
+gradient = SubResource("Gradient_lx40w")
+
+[sub_resource type="Curve" id="Curve_xi468"]
+_data = [Vector2(0, 0.294737), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1h2sl"]
+curve = SubResource("Curve_xi468")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1tbra"]
+lifetime_randomness = 0.2
+emission_shape = 3
+emission_box_extents = Vector3(30, 5, 30)
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = -124.32
+angular_velocity_max = 238.27
+radial_accel_min = 1.0
+radial_accel_max = 2.5
+damping_min = 0.2
+damping_max = 0.3
+angle_min = -385.7
+angle_max = 569.8
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_1h2sl")
+color_ramp = SubResource("GradientTexture1D_c1s4f")
+turbulence_enabled = true
+turbulence_noise_scale = 0.5
+turbulence_noise_speed = Vector3(0, 0.2, 0)
+turbulence_initial_displacement_min = -23.7
+turbulence_initial_displacement_max = 51.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_0ai5s"]
+
+[node name="DustMotes" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.779574, 0)
+material_override = SubResource("StandardMaterial3D_iqiro")
+amount = 40000
+lifetime = 5.0
+preprocess = 25.0
+visibility_aabb = AABB(-14.3851, -4, -15.4866, 28.7702, 8, 30.9733)
+process_material = SubResource("ParticleProcessMaterial_1tbra")
+draw_pass_1 = SubResource("QuadMesh_0ai5s")

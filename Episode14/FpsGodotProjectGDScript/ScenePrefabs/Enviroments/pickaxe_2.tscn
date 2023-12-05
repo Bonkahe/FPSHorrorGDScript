@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://d034wxaiqrnn3"]
+
+[ext_resource type="PackedScene" uid="uid://dh62n7knictc4" path="res://Meshes/Enviroment/Details/Pickaxe2.gltf" id="1_swf5m"]
+[ext_resource type="Material" uid="uid://dxdfcgcawj371" path="res://Materials/Enviroments/Board3Mat.tres" id="2_4qupy"]
+[ext_resource type="Material" uid="uid://c1460fri5rgv8" path="res://Materials/Enviroments/Elevator/TowerMetal.tres" id="3_uym0p"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m0chc"]
+load_path = "res://.godot/imported/BoardEndAlbedo.png-0a3068b4a30a2612857dc82d28cd2b9e.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4f4h5"]
+load_path = "res://.godot/imported/BoardEndNormalMap.png-e2dd26ae45bfff15f929612ef18bb613.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qaxqs"]
+load_path = "res://.godot/imported/BoardEndRoughness.png-a2dfc5816b74a6e7847ab7cc91f73dd3.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0q1s"]
+albedo_color = Color(0.666667, 0.623529, 0.623529, 1)
+albedo_texture = SubResource("CompressedTexture2D_m0chc")
+roughness_texture = SubResource("CompressedTexture2D_qaxqs")
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_4f4h5")
+uv1_scale = Vector3(1.33, 1, 1)
+
+[node name="Pickaxe2" instance=ExtResource("1_swf5m")]
+
+[node name="Handle_002" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_4qupy")
+surface_material_override/1 = SubResource("StandardMaterial3D_m0q1s")
+
+[node name="Head_002" parent="." index="1"]
+surface_material_override/0 = ExtResource("3_uym0p")

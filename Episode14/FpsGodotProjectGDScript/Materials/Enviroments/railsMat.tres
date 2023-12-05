@@ -1,0 +1,27 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bsi6ubcout0n0"]
+
+[ext_resource type="Texture2D" uid="uid://clcotxnbtjn7h" path="res://Textures/Enviroment/RailCart/RustyMetalRoughness.png" id="1_n37tt"]
+
+[sub_resource type="Gradient" id="Gradient_el0wt"]
+offsets = PackedFloat32Array(0, 0.364486, 1)
+colors = PackedColorArray(0.182965, 0.182965, 0.182965, 1, 0.500503, 0.500503, 0.500503, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rlext"]
+frequency = 0.013
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b5fd5"]
+in_3d_space = true
+seamless = true
+as_normal_map = true
+bump_strength = 5.6
+color_ramp = SubResource("Gradient_el0wt")
+noise = SubResource("FastNoiseLite_rlext")
+
+[resource]
+albedo_color = Color(0.337255, 0.337255, 0.337255, 1)
+metallic = 0.95
+roughness = 0.7
+roughness_texture = ExtResource("1_n37tt")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_b5fd5")
+uv1_triplanar = true

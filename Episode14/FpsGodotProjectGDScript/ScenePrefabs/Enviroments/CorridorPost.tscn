@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbtm8wpaenvfa"]
+
+[ext_resource type="PackedScene" uid="uid://cri2gqgfrm4yy" path="res://Meshes/Enviroment/PostMesh.gltf" id="1_e2axp"]
+[ext_resource type="Material" uid="uid://c70817i0rlbsy" path="res://Materials/Enviroments/Board1Mat.tres" id="2_7822v"]
+[ext_resource type="Material" uid="uid://d12lp67bq012k" path="res://Materials/Enviroments/Board2Mat.tres" id="3_oqtmc"]
+[ext_resource type="Material" uid="uid://y2kyp3gkpgx" path="res://Materials/Enviroments/Log1Mat.tres" id="3_sejry"]
+[ext_resource type="Material" uid="uid://dxdfcgcawj371" path="res://Materials/Enviroments/Board3Mat.tres" id="4_42ywa"]
+[ext_resource type="PackedScene" uid="uid://d0c6et8qbj67v" path="res://ScenePrefabs/Enviroments/MuddyPile1.tscn" id="6_3xetr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ju701"]
+size = Vector3(1, 10.6592, 1)
+
+[node name="PostMesh" instance=ExtResource("1_e2axp")]
+
+[node name="Post" parent="." index="0"]
+surface_material_override/0 = ExtResource("4_42ywa")
+surface_material_override/1 = ExtResource("3_sejry")
+
+[node name="PostCollision" type="StaticBody3D" parent="Post" index="0"]
+transform = Transform3D(2.05827, 0, 0, 0, 0.191686, 0, 0, 0, 2.05827, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Post/PostCollision" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.19959, 0)
+shape = SubResource("BoxShape3D_ju701")
+
+[node name="TopPlank" parent="." index="1"]
+surface_material_override/0 = ExtResource("2_7822v")
+surface_material_override/1 = ExtResource("3_oqtmc")
+surface_material_override/2 = ExtResource("4_42ywa")
+
+[node name="PostBaseMesh" parent="." index="2" instance=ExtResource("6_3xetr")]
+transform = Transform3D(0.597519, 0, 0, 0, 0.597519, 0, 0, 0, 0.597519, 0, -6.06218, 0)

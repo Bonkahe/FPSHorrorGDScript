@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://jlxo4x45yb3m"]
+
+[ext_resource type="Texture2D" uid="uid://bqn3gkvepnf2g" path="res://Textures/Enviroment/Structures/PapersAlbedo2.png" id="1_7un4i"]
+[ext_resource type="Shader" uid="uid://c44m80yk1qtcm" path="res://Shaders/Enviroments/PapersShader.tres" id="1_t1rjb"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_627u8"]
+load_path = "res://.godot/imported/PapersNormalMap.png-82c93c3392902d3438bc33d3844a65f9.s3tc.ctex"
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_t1rjb")
+shader_parameter/ColorTint = Color(0.72549, 0.701961, 0.698039, 1)
+shader_parameter/Roughness = 0.8
+shader_parameter/NormalMapPower = 2.43
+shader_parameter/AlphaClip = 0.891
+shader_parameter/Albedo = ExtResource("1_7un4i")
+shader_parameter/NormalMap = SubResource("CompressedTexture2D_627u8")

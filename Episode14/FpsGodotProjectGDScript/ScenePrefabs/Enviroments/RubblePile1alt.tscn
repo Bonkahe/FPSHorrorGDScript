@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnojgpksp37tw"]
+
+[ext_resource type="PackedScene" uid="uid://v5ei0uglgdsy" path="res://ScenePrefabs/Enviroments/RubblePile1.tscn" id="1_txooi"]
+[ext_resource type="Material" uid="uid://crprxguasta8" path="res://Materials/Enviroments/Rubble1-altMat.tres" id="2_v755c"]
+
+[node name="RubblePiles1" instance=ExtResource("1_txooi")]
+
+[node name="RefMesh" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_v755c")

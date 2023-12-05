@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://7stt6fpm34mu"]
+
+[ext_resource type="Material" uid="uid://cemu4hl3f4ffh" path="res://Materials/Experiments/RaymarchedGeometryMat.tres" id="1_ld46w"]
+[ext_resource type="Material" uid="uid://okhcixlbs4i0" path="res://Materials/Experiments/RaymarchedDecalMat.tres" id="2_pwgii"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3y2ri"]
+
+[sub_resource type="Sky" id="Sky_sm278"]
+sky_material = SubResource("ProceduralSkyMaterial_3y2ri")
+
+[sub_resource type="Environment" id="Environment_a4uve"]
+background_mode = 2
+sky = SubResource("Sky_sm278")
+tonemap_mode = 2
+ssr_enabled = true
+sdfgi_enabled = true
+sdfgi_cascades = 8
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_publd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8dpdg"]
+
+[sub_resource type="StandardMaterial3D" id="5"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="4"]
+material = SubResource("5")
+size = Vector3(4, 4, 4)
+
+[node name="Scene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a4uve")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, -0.213215, 0.772079, 0.598693, -0.452264, 0.465179, -0.760964, 1.62884, 0.234661, 0)
+shadow_enabled = true
+
+[node name="decal4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5438, 0, 0, 0, -1.63324e-07, -1.5438, 0, 3.73641, -6.74816e-08, -1.29273, 1.0736, 0.380806)
+mesh = SubResource("BoxMesh_publd")
+surface_material_override/0 = ExtResource("2_pwgii")
+
+[node name="Domain" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.66378, 0, 0, 0, 2.66378, 0, 0, 0, 2.66378, 0.274977, -0.191969, 0.341206)
+material_override = ExtResource("1_ld46w")
+mesh = SubResource("SphereMesh_8dpdg")
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.07724)
+mesh = SubResource("4")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0299506, -0.317186, -1.44033)
+light_size = 0.045
+shadow_enabled = true
+shadow_blur = 2.886
+omni_range = 4.37492
