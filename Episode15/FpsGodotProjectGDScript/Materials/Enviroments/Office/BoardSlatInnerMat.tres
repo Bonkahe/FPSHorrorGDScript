@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bnwj0wc00ryjk"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50hng"]
+load_path = "res://.godot/imported/BoardEndAlbedo.png-0a3068b4a30a2612857dc82d28cd2b9e.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o3wqj"]
+load_path = "res://.godot/imported/LogNormalMap.png-637625a40ed1a6a6376871f6c97144b1.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p2ihq"]
+load_path = "res://.godot/imported/BoardEndRoughness.png-a2dfc5816b74a6e7847ab7cc91f73dd3.s3tc.ctex"
+
+[resource]
+albedo_color = Color(0.631373, 0.588235, 0.521569, 1)
+albedo_texture = SubResource("CompressedTexture2D_50hng")
+roughness_texture = SubResource("CompressedTexture2D_p2ihq")
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_o3wqj")

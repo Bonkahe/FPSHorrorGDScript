@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm7mnrvslgfm4"]
+
+[ext_resource type="PackedScene" uid="uid://duw2lu4cv8alq" path="res://Meshes/Enviroment/Corridor_Wall2.gltf" id="1_b6p83"]
+[ext_resource type="Material" uid="uid://bk6hfsss136d2" path="res://Materials/Enviroments/Wall2Mat.tres" id="2_u04cb"]
+
+[node name="Corridor_Wall2" instance=ExtResource("1_b6p83")]
+
+[node name="Wall2" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_u04cb")

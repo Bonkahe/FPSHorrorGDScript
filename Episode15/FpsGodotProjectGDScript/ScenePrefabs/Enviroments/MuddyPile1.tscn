@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0c6et8qbj67v"]
+
+[ext_resource type="PackedScene" uid="uid://ckkbsohf1ioqx" path="res://Meshes/Enviroment/RubblePiles/PostBaseMesh.gltf" id="1_tmhgm"]
+[ext_resource type="Material" uid="uid://dtqo6ljnshclr" path="res://Materials/Enviroments/MuddyPilePostBaseMat.tres" id="2_k1c8h"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dhx6w"]
+points = PackedVector3Array(0.270174, -0.32573, 1.23242, -0.382855, -0.364155, -1.22752, -1.11318, -0.40258, -1.11218, 0.0674206, 0.0954689, -0.196084, 1.15412, -0.40258, -0.996839, -1.11318, -0.40258, 1.11684, 1.07755, -0.441062, 0.77106, 1.07755, -0.248879, 0.924926, -0.53648, 0.0200408, 0.117308, 0.00145006, 0.0200408, 0.617434, 1.03902, -0.287305, -1.15046, -1.03612, -0.287305, -1.15046, -1.11318, -0.441062, -0.76616, -1.11318, -0.172029, -0.0743628, 1.15412, -0.210454, -0.65082, 0.731292, -0.441062, -1.15046, 0.200255, 0.0960679, 0.234528, -1.07465, -0.248879, 0.924926, 0.808346, -0.441062, 1.15512, -0.228988, -0.210454, -1.11218, -1.03612, -0.441062, 0.809346, -0.459668, -0.210454, 1.11684, 0.501094, -0.248879, 1.19389, -1.22852, -0.287305, -0.227988, 1.23142, -0.32573, 0.232648, -0.997839, -0.172029, -0.689347, 1.07755, -0.172029, -0.035836, 1.11584, -0.40258, 1.11684, -0.16492, 0.0633828, -0.296933, 0.462327, -0.172029, -0.996839, -1.22852, -0.40258, 0.117308, -1.22852, -0.287305, 0.4248)
+
+[node name="PostBaseMesh" instance=ExtResource("1_tmhgm")]
+
+[node name="Plane_003" parent="." index="0"]
+lod_bias = 0.15
+surface_material_override/0 = ExtResource("2_k1c8h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane_003" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane_003/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_dhx6w")

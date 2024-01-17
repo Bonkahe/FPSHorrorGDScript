@@ -1,0 +1,40 @@
+[gd_resource type="ShaderMaterial" load_steps=11 format=3 uid="uid://dbxhuibdft0jj"]
+
+[ext_resource type="Shader" uid="uid://csnhnphopaj2x" path="res://Shaders/Enviroments/NaturalTunnelShader.tres" id="1_4yhce"]
+[ext_resource type="Texture2D" uid="uid://dshlneyhpaxwo" path="res://Textures/Enviroment/Temple/Observatory_NormalMap.png" id="2_wnida"]
+[ext_resource type="Texture2D" uid="uid://kt7nxe5v46fh" path="res://Textures/Enviroment/RubblePiles/MuddyGroundAlbedo.png" id="3_esips"]
+[ext_resource type="Texture2D" uid="uid://cjc3vato5t46u" path="res://Textures/Enviroment/RubblePiles/MuddyGroundNormalMap.png" id="4_shuca"]
+[ext_resource type="Texture2D" uid="uid://ljfajpxp0aty" path="res://Textures/Enviroment/RubblePiles/MuddyGroundRoughness.png" id="5_505g5"]
+[ext_resource type="Texture2D" uid="uid://u5bujcv3124o" path="res://Textures/Enviroment/Rock1_Albedo.png" id="6_yrdm3"]
+[ext_resource type="Texture2D" uid="uid://cvns08wc6od2t" path="res://Textures/Enviroment/Rock1_Normals.png" id="7_lh37n"]
+[ext_resource type="Texture2D" uid="uid://dojppdsgbqmq7" path="res://Textures/Enviroment/Rock1_Roughness.png" id="8_gtccy"]
+[ext_resource type="Texture2D" uid="uid://d21bwmvrqs041" path="res://Textures/Enviroment/RubblePiles/MuddyGroundHeight.png" id="9_h2hs4"]
+[ext_resource type="Texture2D" uid="uid://cftpisgrfuynb" path="res://Textures/Enviroment/Moon_Flowers_Emission.png" id="10_hbtb7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_4yhce")
+shader_parameter/BlueLayerTint = Color(0.666667, 0.639216, 0.72549, 1)
+shader_parameter/GreenLayerTint = Color(0.52549, 0.552941, 0.752941, 1)
+shader_parameter/HeightMixMult = 5.0
+shader_parameter/RedLayerTint = Color(0.52549, 0.552941, 0.752941, 1)
+shader_parameter/RoughnessMult = 0.9
+shader_parameter/EmissionTint = Color(0.568627, 0.54902, 0.886275, 1)
+shader_parameter/EmissionPower = 0.5
+shader_parameter/BaseNormalMapBlend = 0.5
+shader_parameter/NormalMapDepth = 2.0
+shader_parameter/triplanar_scale = Vector3(2, 2, 2)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 16.745
+shader_parameter/BlueAlbedo = ExtResource("3_esips")
+shader_parameter/GreenAlbedo = ExtResource("6_yrdm3")
+shader_parameter/HeightMix = ExtResource("9_h2hs4")
+shader_parameter/RedAlbedo = ExtResource("6_yrdm3")
+shader_parameter/BlueRoughness = ExtResource("5_505g5")
+shader_parameter/GreenRoughness = ExtResource("8_gtccy")
+shader_parameter/RedRoughness = ExtResource("8_gtccy")
+shader_parameter/RedEmission = ExtResource("10_hbtb7")
+shader_parameter/BlueNormal = ExtResource("4_shuca")
+shader_parameter/GreenNormal = ExtResource("7_lh37n")
+shader_parameter/RedNormal = ExtResource("7_lh37n")
+shader_parameter/BaseLevelNormalMap = ExtResource("2_wnida")
