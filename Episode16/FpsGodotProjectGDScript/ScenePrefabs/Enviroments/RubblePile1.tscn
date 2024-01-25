@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://v5ei0uglgdsy"]
+
+[ext_resource type="PackedScene" uid="uid://b6ga0pfaltkwo" path="res://Meshes/Enviroment/RubblePiles/RubblePiles1.gltf" id="1_cx3nm"]
+[ext_resource type="Material" uid="uid://djk0r1lrupuub" path="res://Materials/Enviroments/Rubble1Mat.tres" id="2_7k6sw"]
+
+[node name="RubblePiles1" instance=ExtResource("1_cx3nm")]
+
+[node name="RefMesh" parent="." index="0"]
+lod_bias = 0.08
+surface_material_override/0 = ExtResource("2_7k6sw")

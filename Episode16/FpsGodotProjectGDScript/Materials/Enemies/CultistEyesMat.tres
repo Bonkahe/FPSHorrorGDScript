@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dvbl3wpur0731"]
+
+[ext_resource type="Shader" uid="uid://c3u30d03horfo" path="res://Shaders/Enemies/CultistEyeShader.tres" id="1_7j0lm"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7j0lm")
+shader_parameter/BaseColor = Color(0, 0, 0, 1)
+shader_parameter/Emission = Color(0.364706, 0.615686, 0.843137, 1)
+shader_parameter/EdgeEmission = Color(0.0666667, 0.14902, 0.294118, 1)
+shader_parameter/FresnelPower = 1.34
+shader_parameter/FresnelSharpness = 2.285
+shader_parameter/EmissionPower = 0.515

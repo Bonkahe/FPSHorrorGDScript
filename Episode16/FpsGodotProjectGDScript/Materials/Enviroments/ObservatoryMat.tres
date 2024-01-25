@@ -1,0 +1,54 @@
+[gd_resource type="ShaderMaterial" load_steps=13 format=3 uid="uid://w7u7053d36b4"]
+
+[ext_resource type="Shader" uid="uid://dfxrqoafhj88k" path="res://Shaders/Enviroments/ObservatoryShader.tres" id="1_mwiid"]
+[ext_resource type="Texture2D" uid="uid://dtosnh8smninv" path="res://Textures/Enviroment/Rock2_Albedo.png" id="2_jgagi"]
+[ext_resource type="Texture2D" uid="uid://cvns08wc6od2t" path="res://Textures/Enviroment/Rock1_Normals.png" id="3_mhehe"]
+[ext_resource type="Texture2D" uid="uid://td6udqq4ifuy" path="res://Textures/Enviroment/Rock2_Roughness.png" id="4_4uqsp"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w3c27"]
+load_path = "res://.godot/imported/Observatory_NormalMap.png-9e3c5f8e0a00bd5b72d86000c69b1af7.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0n4hq"]
+load_path = "res://.godot/imported/MuddyGroundAlbedo.png-194bb3b20cb87c779ab7717a114d686b.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rka87"]
+load_path = "res://.godot/imported/MuddyGroundNormalMap.png-399e676893cc2239c06ac33b7f3cb834.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3yaix"]
+load_path = "res://.godot/imported/MuddyGroundRoughness.png-9e3b2e0ce986286881a837b51b723351.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ydr2"]
+load_path = "res://.godot/imported/Rock1_Albedo.png-f2e1eb6409c0b6e84de58eda8d7afef2.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_curcm"]
+load_path = "res://.godot/imported/Rock1_Normals.png-4a40a2bb41372688e44d423e4b2caa3a.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hms58"]
+load_path = "res://.godot/imported/Rock1_Roughness.png-9b6e0f781fcffee380cc6a4503c4a4f9.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0ftbh"]
+load_path = "res://.godot/imported/MuddyGroundHeight.png-561ae084a0ab8a046895ebae9969c57a.s3tc.ctex"
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_mwiid")
+shader_parameter/BlueLayerTint = Color(0.666667, 0.639216, 0.72549, 1)
+shader_parameter/GreenLayerTint = Color(0.52549, 0.552941, 0.752941, 1)
+shader_parameter/HeightMixMult = 2.0
+shader_parameter/RedLayerTint = Color(0.52549, 0.552941, 0.752941, 1)
+shader_parameter/RoughnessMult = 0.9
+shader_parameter/NormalMapDepth = 1.5
+shader_parameter/triplanar_scale = Vector3(0.25, 0.25, 0.25)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 3.43
+shader_parameter/BlueAlbedo = SubResource("CompressedTexture2D_0n4hq")
+shader_parameter/GreenAlbedo = SubResource("CompressedTexture2D_5ydr2")
+shader_parameter/HeightMix = SubResource("CompressedTexture2D_0ftbh")
+shader_parameter/RedAlbedo = ExtResource("2_jgagi")
+shader_parameter/BlueRoughness = SubResource("CompressedTexture2D_3yaix")
+shader_parameter/GreenRoughness = SubResource("CompressedTexture2D_hms58")
+shader_parameter/RedRoughness = ExtResource("4_4uqsp")
+shader_parameter/BaseLevelNormalMap = SubResource("CompressedTexture2D_w3c27")
+shader_parameter/BlueNormal = SubResource("CompressedTexture2D_rka87")
+shader_parameter/GreenNormal = SubResource("CompressedTexture2D_curcm")
+shader_parameter/RedNormal = ExtResource("3_mhehe")

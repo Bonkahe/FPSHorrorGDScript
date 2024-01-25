@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://xw7ux8akpd01"]
+
+[ext_resource type="Texture2D" uid="uid://bt7niba5bita5" path="res://Textures/Arms/Flashlight_Albedo.png" id="1_0vhhn"]
+[ext_resource type="Texture2D" uid="uid://dywp30adc6udd" path="res://Textures/Arms/Flashlight_NormalMap.png" id="2_hihyu"]
+[ext_resource type="Texture2D" uid="uid://csdr8jm8uqjso" path="res://Textures/Arms/Flashlight_Metalness.png" id="2_knr5c"]
+[ext_resource type="Texture2D" uid="uid://dxl4cl0ecb2pk" path="res://Textures/Arms/Flashlight_Roughness.png" id="3_f2tkr"]
+
+[resource]
+albedo_color = Color(0.85098, 0.85098, 0.85098, 1)
+albedo_texture = ExtResource("1_0vhhn")
+metallic = 1.0
+metallic_texture = ExtResource("2_knr5c")
+roughness_texture = ExtResource("3_f2tkr")
+normal_enabled = true
+normal_texture = ExtResource("2_hihyu")
