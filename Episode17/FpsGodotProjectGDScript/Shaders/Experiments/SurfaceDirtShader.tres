@@ -1,0 +1,245 @@
+[gd_resource type="VisualShader" load_steps=23 format=3 uid="uid://cghki8ecby6nt"]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_1p6gj"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_t5foq"]
+operator = 5
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_cssuw"]
+parameter_name = "HeightPower"
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeTextureParameterTriplanar" id="VisualShaderNodeTextureParameterTriplanar_rei5o"]
+parameter_name = "Height"
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_8but3"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_k7uo8"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_pnoqo"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeTextureParameterTriplanar" id="VisualShaderNodeTextureParameterTriplanar_ksgar"]
+parameter_name = "BottomAlbedo"
+
+[sub_resource type="VisualShaderNodeTextureParameterTriplanar" id="VisualShaderNodeTextureParameterTriplanar_a1ujc"]
+parameter_name = "BottomRoughness"
+
+[sub_resource type="VisualShaderNodeTextureParameterTriplanar" id="VisualShaderNodeTextureParameterTriplanar_436yu"]
+parameter_name = "BottomNormal"
+
+[sub_resource type="VisualShaderNodeTextureParameterTriplanar" id="VisualShaderNodeTextureParameterTriplanar_pvoce"]
+parameter_name = "BottomAlbedo2"
+
+[sub_resource type="VisualShaderNodeTextureParameterTriplanar" id="VisualShaderNodeTextureParameterTriplanar_rl2uq"]
+parameter_name = "BottomNormal2"
+
+[sub_resource type="VisualShaderNodeTextureParameterTriplanar" id="VisualShaderNodeTextureParameterTriplanar_tebn4"]
+parameter_name = "BottomRoughness2"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_nsqd6"]
+input_name = "normal"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_84h66"]
+input_name = "inv_view_matrix"
+
+[sub_resource type="VisualShaderNodeTransformFunc" id="VisualShaderNodeTransformFunc_4pjkm"]
+function = 1
+
+[sub_resource type="VisualShaderNodeTransformVecMult" id="VisualShaderNodeTransformVecMult_t7wmb"]
+operator = 3
+
+[sub_resource type="VisualShaderNodeDotProduct" id="VisualShaderNodeDotProduct_m14ah"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0, 1, 0)]
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_cohsh"]
+default_input_values = [0, 0.48, 1, 0.5, 2, 0.5]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p6mor"]
+frequency = 0.0265
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_snkj3"]
+seamless = true
+noise = SubResource("FastNoiseLite_p6mor")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_4qh4k"]
+source = 5
+texture = SubResource("NoiseTexture2D_snkj3")
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D BottomAlbedo;
+uniform sampler2D BottomAlbedo2;
+uniform sampler2D Height;
+uniform float HeightPower = 1;
+uniform sampler2D BottomRoughness;
+uniform sampler2D BottomRoughness2;
+uniform sampler2D BottomNormal;
+uniform sampler2D BottomNormal2;
+
+
+// TextureParameterTriplanar
+	vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos) {
+		vec4 samp = vec4(0.0);
+		samp += texture(p_sampler, p_triplanar_pos.xy) * p_weights.z;
+		samp += texture(p_sampler, p_triplanar_pos.xz) * p_weights.y;
+		samp += texture(p_sampler, p_triplanar_pos.zy * vec2(-1.0, 1.0)) * p_weights.x;
+		return samp;
+	}
+
+	uniform vec3 triplanar_scale = vec3(1.0, 1.0, 1.0);
+	uniform vec3 triplanar_offset;
+	uniform float triplanar_sharpness = 0.5;
+
+	varying vec3 triplanar_power_normal;
+	varying vec3 triplanar_pos;
+
+void vertex() {
+// TextureParameterTriplanar
+	{
+		triplanar_power_normal = pow(abs(NORMAL), vec3(triplanar_sharpness));
+		triplanar_power_normal /= dot(triplanar_power_normal, vec3(1.0));
+		triplanar_pos = VERTEX * triplanar_scale + triplanar_offset;
+		triplanar_pos *= vec3(1.0, -1.0, 1.0);
+	}
+}
+
+void fragment() {
+// TextureParameterTriplanar:17
+	vec4 n_out17p0 = triplanar_texture(BottomAlbedo, triplanar_power_normal, triplanar_pos);
+
+
+// TextureParameterTriplanar:20
+	vec4 n_out20p0 = triplanar_texture(BottomAlbedo2, triplanar_power_normal, triplanar_pos);
+
+
+// TextureParameterTriplanar:13
+	vec4 n_out13p0 = triplanar_texture(Height, triplanar_power_normal, triplanar_pos);
+
+
+// FloatParameter:12
+	float n_out12p0 = HeightPower;
+
+
+// FloatOp:11
+	float n_out11p0 = pow(n_out13p0.x, n_out12p0);
+
+
+// Input:4
+	mat4 n_out4p0 = INV_VIEW_MATRIX;
+
+
+// TransformFunc:5
+	mat4 n_out5p0 = transpose(n_out4p0);
+
+
+// Input:3
+	vec3 n_out3p0 = NORMAL;
+
+
+// TransformVectorMult:6
+	vec3 n_out6p0 = (vec4(n_out3p0, 0.0) * n_out5p0).xyz;
+
+
+// DotProduct:7
+	vec3 n_in7p1 = vec3(0.00000, 1.00000, 0.00000);
+	float n_out7p0 = dot(n_out6p0, n_in7p1);
+
+
+// FloatOp:10
+	float n_out10p0 = n_out11p0 * n_out7p0;
+
+
+// SmoothStep:8
+	float n_in8p0 = 0.48000;
+	float n_in8p1 = 0.50000;
+	float n_out8p0 = smoothstep(n_in8p0, n_in8p1, n_out10p0);
+
+
+// Mix:14
+	vec3 n_out14p0 = mix(vec3(n_out17p0.xyz), vec3(n_out20p0.xyz), vec3(n_out8p0));
+
+
+// TextureParameterTriplanar:18
+	vec4 n_out18p0 = triplanar_texture(BottomRoughness, triplanar_power_normal, triplanar_pos);
+
+
+// TextureParameterTriplanar:22
+	vec4 n_out22p0 = triplanar_texture(BottomRoughness2, triplanar_power_normal, triplanar_pos);
+
+
+// Mix:15
+	vec3 n_out15p0 = mix(vec3(n_out18p0.xyz), vec3(n_out22p0.xyz), vec3(n_out8p0));
+
+
+// TextureParameterTriplanar:19
+	vec4 n_out19p0 = triplanar_texture(BottomNormal, triplanar_power_normal, triplanar_pos);
+
+
+// TextureParameterTriplanar:21
+	vec4 n_out21p0 = triplanar_texture(BottomNormal2, triplanar_power_normal, triplanar_pos);
+
+
+// Mix:16
+	vec3 n_out16p0 = mix(vec3(n_out19p0.xyz), vec3(n_out21p0.xyz), vec3(n_out8p0));
+
+
+// Output:0
+	ALBEDO = n_out14p0;
+	ROUGHNESS = n_out15p0.x;
+	NORMAL_MAP = n_out16p0;
+
+
+}
+"
+nodes/fragment/0/position = Vector2(1020, 20)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_nsqd6")
+nodes/fragment/3/position = Vector2(-920, 520)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_84h66")
+nodes/fragment/4/position = Vector2(-920, 220)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTransformFunc_4pjkm")
+nodes/fragment/5/position = Vector2(-640, 280)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTransformVecMult_t7wmb")
+nodes/fragment/6/position = Vector2(-400, 360)
+nodes/fragment/7/node = SubResource("VisualShaderNodeDotProduct_m14ah")
+nodes/fragment/7/position = Vector2(-100, 340)
+nodes/fragment/8/node = SubResource("VisualShaderNodeSmoothStep_cohsh")
+nodes/fragment/8/position = Vector2(320, 120)
+nodes/fragment/9/node = SubResource("VisualShaderNodeTexture_4qh4k")
+nodes/fragment/9/position = Vector2(-420, -100)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_1p6gj")
+nodes/fragment/10/position = Vector2(100, 160)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_t5foq")
+nodes/fragment/11/position = Vector2(-118.758, 6.59025)
+nodes/fragment/12/node = SubResource("VisualShaderNodeFloatParameter_cssuw")
+nodes/fragment/12/position = Vector2(-420, 120)
+nodes/fragment/13/node = SubResource("VisualShaderNodeTextureParameterTriplanar_rei5o")
+nodes/fragment/13/position = Vector2(-800, -220)
+nodes/fragment/14/node = SubResource("VisualShaderNodeMix_8but3")
+nodes/fragment/14/position = Vector2(600, -60)
+nodes/fragment/15/node = SubResource("VisualShaderNodeMix_k7uo8")
+nodes/fragment/15/position = Vector2(600, 220)
+nodes/fragment/16/node = SubResource("VisualShaderNodeMix_pnoqo")
+nodes/fragment/16/position = Vector2(600, 400)
+nodes/fragment/17/node = SubResource("VisualShaderNodeTextureParameterTriplanar_ksgar")
+nodes/fragment/17/position = Vector2(20, -520)
+nodes/fragment/18/node = SubResource("VisualShaderNodeTextureParameterTriplanar_a1ujc")
+nodes/fragment/18/position = Vector2(60, 380)
+nodes/fragment/19/node = SubResource("VisualShaderNodeTextureParameterTriplanar_436yu")
+nodes/fragment/19/position = Vector2(80, 840)
+nodes/fragment/20/node = SubResource("VisualShaderNodeTextureParameterTriplanar_pvoce")
+nodes/fragment/20/position = Vector2(-280, -460)
+nodes/fragment/21/node = SubResource("VisualShaderNodeTextureParameterTriplanar_rl2uq")
+nodes/fragment/21/position = Vector2(-220, 1020)
+nodes/fragment/22/node = SubResource("VisualShaderNodeTextureParameterTriplanar_tebn4")
+nodes/fragment/22/position = Vector2(-200, 500)
+nodes/fragment/connections = PackedInt32Array(4, 0, 5, 0, 3, 0, 6, 1, 6, 0, 7, 0, 5, 0, 6, 0, 7, 0, 10, 1, 12, 0, 11, 1, 11, 0, 10, 0, 10, 0, 8, 2, 13, 1, 9, 2, 8, 0, 15, 2, 8, 0, 16, 2, 17, 0, 14, 0, 18, 0, 15, 0, 19, 0, 16, 0, 8, 0, 14, 2, 20, 0, 14, 1, 22, 0, 15, 1, 21, 0, 16, 1, 14, 0, 0, 0, 15, 0, 0, 3, 16, 0, 0, 9, 13, 0, 11, 0)

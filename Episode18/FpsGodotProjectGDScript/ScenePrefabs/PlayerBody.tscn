@@ -1,0 +1,152 @@
+[gd_scene load_steps=9 format=3 uid="uid://clxx6psfl5py8"]
+
+[ext_resource type="Script" path="res://Code/PlayerBodyController.gd" id="1_ihx5p"]
+[ext_resource type="PackedScene" uid="uid://cbkuu0rnihxcb" path="res://ScenePrefabs/ArmsPrefab.tscn" id="2_rc0bo"]
+[ext_resource type="PackedScene" uid="uid://b1q5ius1kk33c" path="res://ScenePrefabs/Effects/DustMotes.tscn" id="3_xjbb1"]
+[ext_resource type="Script" path="res://Code/Enemies/Damageable.gd" id="4_lx6gb"]
+[ext_resource type="Script" path="res://Code/Player/PlayerHealthController.gd" id="4_qb7uh"]
+[ext_resource type="Material" uid="uid://bh7tilovklono" path="res://Materials/Player/DamageOverlayMaterial.tres" id="5_grkj1"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gch08"]
+frequency = 0.0999
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uioy7"]
+
+[node name="PlayerBody" type="CharacterBody3D" node_paths=PackedStringArray("GunEffects", "CameraNode", "CameraActual", "ArmsNode", "animationTree")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.28412, 0.668381, 0)
+collision_layer = 2
+floor_max_angle = 1.0472
+script = ExtResource("1_ihx5p")
+GunEffects = NodePath("ArmsContainer/ArmsMesh/WeaponEffectsController")
+CameraNode = NodePath("CameraContainer")
+CameraActual = NodePath("CameraContainer/Camera3D")
+ArmsNode = NodePath("ArmsContainer")
+animationTree = NodePath("ArmsContainer/ArmsMesh/AnimationTree")
+HandStateMachinePlaybackPath = "parameters/playback"
+IdleAnimationName = "LowIdle"
+AimingAnimationName = "AimingIdle"
+IdleFireAnimationName = "Lowfire"
+AimingFireAnimationName = "Aimingfire"
+IdleReloadAnimationName = "Lowreload"
+AimingReloadAnimationName = "Aimingreload"
+CameraShake_Noise = SubResource("FastNoiseLite_gch08")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_uioy7")
+
+[node name="ArmsContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+
+[node name="ArmsMesh" parent="ArmsContainer" instance=ExtResource("2_rc0bo")]
+
+[node name="Skeleton3D" parent="ArmsContainer/ArmsMesh/Player_Rig" index="0"]
+bones/0/position = Vector3(-0.0229902, -0.224105, 0.0293098)
+bones/1/position = Vector3(-0.189287, -0.250828, 0.0871982)
+bones/1/rotation = Quaternion(0.773812, -0.534394, 0.286436, -0.183283)
+bones/2/position = Vector3(-5.72198e-08, 0.302323, 1.00583e-07)
+bones/2/rotation = Quaternion(0.558477, 0.0100921, -0.00679525, 0.829431)
+bones/3/position = Vector3(2.66486e-08, 0.230798, -4.71205e-08)
+bones/3/rotation = Quaternion(-0.154993, -0.395469, -0.151661, 0.892514)
+bones/4/position = Vector3(-0.00658555, 0.108527, 0.0309003)
+bones/4/rotation = Quaternion(-0.0584989, 0.752768, -0.0548997, 0.653379)
+bones/5/rotation = Quaternion(0.438192, -0.133383, 0.0685039, 0.886287)
+bones/6/rotation = Quaternion(0.452274, -0.00172765, -0.00466094, 0.891865)
+bones/7/rotation = Quaternion(0.145578, 0.904315, 0.368696, 0.158383)
+bones/8/rotation = Quaternion(0.162839, 0.0230102, 0.00447661, 0.986374)
+bones/9/rotation = Quaternion(0.097644, -0.00136261, -0.0171546, 0.995073)
+bones/11/position = Vector3(-0.00646644, 0.110515, 0.00891932)
+bones/11/rotation = Quaternion(0.312135, 0.663831, -0.29837, 0.610635)
+bones/12/rotation = Quaternion(0.59329, -0.0784181, 0.0641473, 0.798588)
+bones/13/rotation = Quaternion(0.528592, -0.00569899, -0.0108787, 0.848787)
+bones/14/position = Vector3(-0.00195385, 0.0427099, 0.00579873)
+bones/14/rotation = Quaternion(0.00773877, 0.419857, 0.0367279, 0.906814)
+bones/15/position = Vector3(0.000657927, 0.113144, -0.00929957)
+bones/15/rotation = Quaternion(0.50643, 0.511624, -0.480817, 0.500584)
+bones/16/rotation = Quaternion(0.402477, -0.041288, 0.0182801, 0.914316)
+bones/17/rotation = Quaternion(0.422125, -6.73906e-05, -0.000234563, 0.906538)
+bones/18/position = Vector3(0.00275743, 0.042157, -0.0103585)
+bones/18/rotation = Quaternion(-0.00283508, 0.428936, 0.0251132, 0.902981)
+bones/19/position = Vector3(0.012317, 0.106467, -0.0262558)
+bones/19/rotation = Quaternion(0.463342, 0.478282, -0.55711, 0.496174)
+bones/20/rotation = Quaternion(0.388287, -0.00183545, -0.00626503, 0.921516)
+bones/21/rotation = Quaternion(0.408535, 0.00463761, 0.0132828, 0.912634)
+bones/22/position = Vector3(0.00923476, 0.0389081, -0.0264122)
+bones/22/rotation = Quaternion(0.0115527, 0.430507, -0.0360466, 0.901793)
+bones/23/position = Vector3(0.0509908, 0.0421464, -0.0140715)
+bones/23/rotation = Quaternion(0.303647, -0.359502, 0.0307887, 0.881821)
+bones/24/position = Vector3(0.037737, -0.224105, 0.0293098)
+bones/25/position = Vector3(0.204034, -0.250828, 0.0871982)
+bones/25/rotation = Quaternion(0.621678, 0.504142, -0.395504, -0.450481)
+bones/26/position = Vector3(1.42678e-07, 0.306163, 1.19559e-07)
+bones/26/rotation = Quaternion(0.292266, 0.0169597, -0.00518416, 0.956173)
+bones/27/position = Vector3(2.41426e-08, 0.234677, -8.73237e-08)
+bones/27/rotation = Quaternion(-0.116388, 0.680739, -0.0756877, 0.719249)
+bones/28/position = Vector3(-0.0199661, 0.0656998, -0.0343968)
+bones/28/rotation = Quaternion(0.497031, -0.0714154, 0.0115158, 0.864713)
+bones/29/rotation = Quaternion(0.904176, 4.63497e-08, -2.54745e-07, -0.427159)
+bones/32/rotation = Quaternion(0.707107, -8.52829e-08, 4.34412e-07, 0.707107)
+bones/34/rotation = Quaternion(0.0724262, -0.741247, 0.0501888, 0.665423)
+bones/35/rotation = Quaternion(0.494485, 0.0016555, -0.00354936, 0.869178)
+bones/36/rotation = Quaternion(0.50299, 0.00199369, 0.00455326, 0.864278)
+bones/37/rotation = Quaternion(-0.275611, 0.809521, 0.504, -0.121234)
+bones/38/rotation = Quaternion(0.327723, 0.0699739, -0.0330235, 0.9416)
+bones/39/rotation = Quaternion(0.266641, 0.00428048, 0.016668, 0.963642)
+bones/41/rotation = Quaternion(0.465494, -0.541599, 0.485956, 0.503818)
+bones/42/rotation = Quaternion(0.596033, -0.00168303, -0.00460761, 0.802945)
+bones/43/rotation = Quaternion(0.52786, 0.00569006, 0.0108828, 0.849243)
+bones/44/rotation = Quaternion(0.000861085, -0.412238, -0.0371553, 0.910318)
+bones/45/rotation = Quaternion(0.4802, -0.456495, 0.577773, 0.476654)
+bones/46/rotation = Quaternion(0.421633, -2.14673e-05, -9.62095e-05, 0.906766)
+bones/47/rotation = Quaternion(0.440683, 7.19843e-05, 0.000233371, 0.897663)
+bones/48/rotation = Quaternion(-0.0377267, -0.413046, -0.0382689, 0.909124)
+bones/49/position = Vector3(0.00711837, 0.104019, -0.0344708)
+bones/49/rotation = Quaternion(0.468687, -0.413363, 0.568142, 0.535424)
+bones/50/rotation = Quaternion(0.378358, -0.0342074, 0.0210082, 0.924789)
+bones/51/rotation = Quaternion(0.399226, -0.00450215, -0.0133288, 0.916744)
+bones/52/rotation = Quaternion(-0.0742554, -0.409919, -0.00694059, 0.909068)
+
+[node name="RevolverBarrelAttachment" parent="ArmsContainer/ArmsMesh/Player_Rig/Skeleton3D" index="14"]
+transform = Transform3D(0.99989, 0.0143311, -0.00384841, -0.0143201, 0.999893, 0.00288072, 0.00388946, -0.00282556, 0.999988, 0.190275, -0.207155, -0.657797)
+
+[node name="RevolverCylinderAttachment" parent="ArmsContainer/ArmsMesh/Player_Rig/Skeleton3D" index="15"]
+transform = Transform3D(0.99989, -0.0038489, -0.0143306, -0.0143196, 0.00288109, -0.999893, 0.00388995, 0.999988, 0.00282592, 0.190494, -0.18648, -0.637994)
+
+[node name="LeftHandItemAttachment" parent="ArmsContainer/ArmsMesh/Player_Rig/Skeleton3D" index="16"]
+transform = Transform3D(0.906763, 0.268001, -0.325508, 0.336878, 0.003773, 0.941541, 0.253562, -0.963411, -0.0868624, -0.288682, -0.452939, -0.307122)
+
+[node name="WeaponEffectsController" parent="ArmsContainer/ArmsMesh" index="3" node_paths=PackedStringArray("PlayerBodyNode", "CameraNode")]
+PlayerBodyNode = NodePath("../../..")
+CameraNode = NodePath("../../../CameraContainer/Camera3D")
+
+[node name="CameraContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraContainer"]
+current = true
+fov = 60.0
+
+[node name="DustMotes" parent="." instance=ExtResource("3_xjbb1")]
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("4_lx6gb")
+
+[node name="PlayerHealth" type="Node" parent="." node_paths=PackedStringArray("PlayerBody")]
+script = ExtResource("4_qb7uh")
+PlayerBody = NodePath("..")
+DamageEffectMaterial = ExtResource("5_grkj1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DamageOverlay" type="ColorRect" parent="CanvasLayer"]
+material = ExtResource("5_grkj1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="OnShotCameraImpulse" from="ArmsContainer/ArmsMesh/WeaponEffectsController" to="." method="ImpulseCameraWithRecoil"]
+[connection signal="OnDamage" from="Damageable" to="PlayerHealth" method="OnDamaged"]
+
+[editable path="ArmsContainer/ArmsMesh"]
+[editable path="ArmsContainer/ArmsMesh/Player_Rig/Skeleton3D/LeftHandItemAttachment/FlashlightMesh"]

@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bxecx4w3u484y"]
+
+[ext_resource type="Texture2D" uid="uid://b3ig150jgd24c" path="res://Textures/Enviroment/Details/Lantern_Albedo.png" id="1_wyt8p"]
+[ext_resource type="Texture2D" uid="uid://bh8tr7mciq8g" path="res://Textures/Enviroment/Details/Lantern_Metalness.png" id="2_qecjf"]
+[ext_resource type="Texture2D" uid="uid://b0w0hr7xxhiay" path="res://Textures/Enviroment/Details/Lantern_NormalMap.png" id="3_y1grh"]
+[ext_resource type="Texture2D" uid="uid://bamruf6g7jhfi" path="res://Textures/Enviroment/Details/Lantern_Roughness.png" id="4_hwria"]
+
+[resource]
+cull_mode = 2
+albedo_texture = ExtResource("1_wyt8p")
+metallic = 1.0
+metallic_texture = ExtResource("2_qecjf")
+roughness_texture = ExtResource("4_hwria")
+normal_enabled = true
+normal_texture = ExtResource("3_y1grh")

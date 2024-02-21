@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://dqsw502n43m4h"]
+
+[ext_resource type="Shader" uid="uid://c4wsldaxbh644" path="res://Shaders/Enemies/CultistBodyShader.tres" id="1_bbqb8"]
+[ext_resource type="Texture2D" uid="uid://dvmqbave4jquw" path="res://Textures/Enemies/CultistAlbedo.png" id="1_jnpy0"]
+[ext_resource type="Texture2D" uid="uid://dkcuwx8rytq8s" path="res://Textures/Enemies/CultistMarksMask.png" id="2_x4mnc"]
+[ext_resource type="Texture2D" uid="uid://cimfuexfxfvj5" path="res://Textures/Enemies/CultistNormalMap.png" id="3_egrct"]
+[ext_resource type="Texture2D" uid="uid://s0fxp8nm2qcv" path="res://Textures/Enemies/CultistRoughness.png" id="4_jos1a"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r4jft"]
+noise_type = 0
+frequency = 0.056
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_t5dqh"]
+seamless = true
+seamless_blend_skirt = 0.2
+noise = SubResource("FastNoiseLite_r4jft")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_bbqb8")
+shader_parameter/AlbedoTint = Color(1, 1, 1, 1)
+shader_parameter/EmissionColor = Color(0.258824, 0.411765, 0.670588, 1)
+shader_parameter/EmissionPower = 1.0
+shader_parameter/DissolveEmissionPower = 20.0
+shader_parameter/NormalMapDepth = 1.0
+shader_parameter/SubSurfaceStrength = 0.36
+shader_parameter/AlphaClip = 0.5
+shader_parameter/Albedo = ExtResource("1_jnpy0")
+shader_parameter/DissolveTexture = SubResource("NoiseTexture3D_t5dqh")
+shader_parameter/Roughness = ExtResource("4_jos1a")
+shader_parameter/Emission = ExtResource("2_x4mnc")
+shader_parameter/NormalMap = ExtResource("3_egrct")

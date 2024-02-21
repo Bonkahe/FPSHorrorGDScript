@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://okhcixlbs4i0"]
+
+[ext_resource type="Shader" path="res://Shaders/Experiments/RaymarchedDecal.gdshader" id="1_1oa30"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_1oa30")
+shader_parameter/col_distance_scale = 19.977
+shader_parameter/col_near = Color(0.403922, 0.113725, 0.0627451, 1)
+shader_parameter/col_far = Color(0.00784314, 0, 0, 1)
+shader_parameter/emission_boost = 5.0
+shader_parameter/sphere_radius = 0.102
+shader_parameter/noise_scale = 3.582
+shader_parameter/detail = 6
+shader_parameter/rough = 0.5
+shader_parameter/inflate = 0.1
+shader_parameter/smooth_fac = 0.75
+shader_parameter/step_mult = 0.26

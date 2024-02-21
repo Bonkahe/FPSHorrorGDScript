@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://frql06aoqf20"]
+
+[ext_resource type="PackedScene" uid="uid://crlndds72kvcs" path="res://Meshes/Arms/FlashlightMesh.gltf" id="1_lndbp"]
+[ext_resource type="Material" uid="uid://xw7ux8akpd01" path="res://Materials/FlashlightMaterial.tres" id="2_upqbp"]
+[ext_resource type="Material" uid="uid://dfj05b5f240q3" path="res://Materials/FlashlightLensInactiveMaterial.tres" id="3_ngt7r"]
+
+[node name="FlashlightMesh" instance=ExtResource("1_lndbp")]
+
+[node name="FlashlightBodyButtonLP" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_upqbp")
+
+[node name="FlashlightBodyLensLP" parent="." index="1"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("3_ngt7r")
+
+[node name="FlashlightBodyLP" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_upqbp")

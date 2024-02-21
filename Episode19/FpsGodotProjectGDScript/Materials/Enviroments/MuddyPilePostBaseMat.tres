@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://dtqo6ljnshclr"]
+
+[ext_resource type="Texture2D" uid="uid://kt7nxe5v46fh" path="res://Textures/Enviroment/RubblePiles/MuddyGroundAlbedo.png" id="1_4xrh6"]
+[ext_resource type="Texture2D" uid="uid://d21bwmvrqs041" path="res://Textures/Enviroment/RubblePiles/MuddyGroundHeight.png" id="2_vntv0"]
+[ext_resource type="Texture2D" uid="uid://cjc3vato5t46u" path="res://Textures/Enviroment/RubblePiles/MuddyGroundNormalMap.png" id="3_hou7m"]
+[ext_resource type="Texture2D" uid="uid://ljfajpxp0aty" path="res://Textures/Enviroment/RubblePiles/MuddyGroundRoughness.png" id="4_w51rh"]
+
+[resource]
+albedo_color = Color(0.709804, 0.705882, 0.760784, 1)
+albedo_texture = ExtResource("1_4xrh6")
+roughness_texture = ExtResource("4_w51rh")
+normal_enabled = true
+normal_texture = ExtResource("3_hou7m")
+ao_enabled = true
+ao_texture = ExtResource("2_vntv0")

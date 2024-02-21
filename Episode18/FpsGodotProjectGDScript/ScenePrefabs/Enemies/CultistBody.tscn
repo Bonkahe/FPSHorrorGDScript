@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfvup7v6vwpjx"]
+
+[ext_resource type="PackedScene" uid="uid://be820l1xl0yde" path="res://Meshes/Enemies/Cultist.gltf" id="1_8k11p"]
+[ext_resource type="Material" uid="uid://dvbl3wpur0731" path="res://Materials/Enemies/CultistEyesMat.tres" id="2_p3m5s"]
+[ext_resource type="Material" uid="uid://dqsw502n43m4h" path="res://Materials/Enemies/CultistBodyCustomMat.tres" id="3_0d4go"]
+
+[node name="Cultist" instance=ExtResource("1_8k11p")]
+
+[node name="CultistEyesMesh" parent="CultistRig/Skeleton3D" index="0"]
+layers = 2
+ignore_occlusion_culling = true
+gi_mode = 0
+surface_material_override/0 = ExtResource("2_p3m5s")
+
+[node name="CultistMesh" parent="CultistRig/Skeleton3D" index="1"]
+layers = 2
+lod_bias = 0.4
+ignore_occlusion_culling = true
+gi_mode = 0
+surface_material_override/0 = ExtResource("3_0d4go")
+
+[node name="Chest" type="PhysicalBone3D" parent="CultistRig/Skeleton3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.850691, 0.525643, 0, -0.525643, 0.850691, 0, 1.29442, -0.0556059)
+collision_layer = 4
+collision_mask = 0
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.22727e-05, 0.00111443)
+body_offset = Transform3D(1, 0, 0, 0, 0.865357, 0.501133, 0, -0.501133, 0.865357, 0, -0.000521898, -0.000985567)
+bone_name = "spine.003"
+
+[node name="Hand_R_IK" type="SkeletonIK3D" parent="CultistRig/Skeleton3D" index="3"]
+root_bone = &"upper_arm.R"
+tip_bone = &"hand.R"
+use_magnet = true
+
+[node name="Hand_L_IK" type="SkeletonIK3D" parent="CultistRig/Skeleton3D" index="4"]
+root_bone = &"upper_arm.L"
+tip_bone = &"hand.L"
+use_magnet = true
+
+[node name="Foot_R_IK" type="SkeletonIK3D" parent="CultistRig/Skeleton3D" index="5"]
+root_bone = &"thigh.R"
+tip_bone = &"foot.R"
+use_magnet = true
+
+[node name="Foot_L_IK" type="SkeletonIK3D" parent="CultistRig/Skeleton3D" index="6"]
+root_bone = &"thigh.L"
+tip_bone = &"foot.L"
+use_magnet = true
+
+[node name="Head_IK" type="SkeletonIK3D" parent="CultistRig/Skeleton3D" index="7"]
+root_bone = &"spine.004"
+tip_bone = &"spine.005"

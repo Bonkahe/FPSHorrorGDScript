@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bh7tilovklono"]
+
+[ext_resource type="Shader" path="res://Shaders/PostProcessing/DamageOverlayPost.gdshader" id="1_50n2b"]
+[ext_resource type="Texture2D" uid="uid://dp3sw34h023d1" path="res://Textures/Effects/VeinsOverlay.png" id="2_b5hob"]
+
+[sub_resource type="Gradient" id="Gradient_jxw5n"]
+offsets = PackedFloat32Array(0.340984, 0.718033, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.34509, 0.154671, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jh4n8"]
+gradient = SubResource("Gradient_jxw5n")
+
+[resource]
+shader = ExtResource("1_50n2b")
+shader_parameter/EffectStrength = 0.0
+shader_parameter/TextureEffect = 0.8
+shader_parameter/Feather = 1.0
+shader_parameter/MinRadius = 0.815
+shader_parameter/MaxRadius = 0.0
+shader_parameter/PulseSpeed = 3.0
+shader_parameter/PulsePower = 0.2
+shader_parameter/OverlayEffect = ExtResource("2_b5hob")
+shader_parameter/TintGradient = SubResource("GradientTexture1D_jh4n8")

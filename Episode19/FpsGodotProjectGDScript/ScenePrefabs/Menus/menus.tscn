@@ -1,0 +1,204 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx7kbo3n7wioc"]
+
+[ext_resource type="Material" uid="uid://7t8qlhrtj63s" path="res://Materials/Player/MenuOverlayMaterial.tres" id="1_q2i5s"]
+[ext_resource type="Script" path="res://Code/Player/MenuHandler.gd" id="1_qqnjx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kcddd"]
+font_size = 51
+
+[sub_resource type="LabelSettings" id="LabelSettings_syhfj"]
+font_size = 26
+
+[node name="Menus" type="Control" node_paths=PackedStringArray("LaunchMenu", "PauseMenu", "DeathMenu")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qqnjx")
+LaunchMenu = NodePath("LaunchMenu")
+PauseMenu = NodePath("PauseMenu")
+DeathMenu = NodePath("RestartMenu")
+TransitionMaterial = ExtResource("1_q2i5s")
+
+[node name="LaunchMenu" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.0
+offset_top = -196.0
+offset_right = 205.0
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LaunchMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = 47.0
+offset_right = -45.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="LaunchMenu/VBoxContainer"]
+layout_mode = 2
+text = "FPS Horror"
+label_settings = SubResource("LabelSettings_kcddd")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="LaunchMenu/VBoxContainer"]
+layout_mode = 2
+text = "By Bonkahe"
+label_settings = SubResource("LabelSettings_syhfj")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="LaunchMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="FullScreenButton" type="Button" parent="LaunchMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Full Screen Toggle"
+
+[node name="PlayButton" type="Button" parent="LaunchMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 57.835)
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="LaunchMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 57.835)
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Quit"
+
+[node name="PauseMenu" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.0
+offset_top = -196.0
+offset_right = 205.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = 47.0
+offset_right = -45.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_kcddd")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 57.835)
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Resume
+"
+
+[node name="QuitButton" type="Button" parent="PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 57.835)
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Quit"
+
+[node name="RestartMenu" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.0
+offset_top = -196.0
+offset_right = 205.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RestartMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = 47.0
+offset_right = -45.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="RestartMenu/VBoxContainer"]
+layout_mode = 2
+text = "You Died"
+label_settings = SubResource("LabelSettings_kcddd")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="RestartMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="RestartMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 57.835)
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Restart
+"
+
+[node name="QuitButton" type="Button" parent="RestartMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 57.835)
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Quit"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="TransitionOverlay" type="ColorRect" parent="CanvasLayer"]
+material = ExtResource("1_q2i5s")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="LaunchMenu/VBoxContainer/FullScreenButton" to="." method="ToggleFullScreen"]
+[connection signal="pressed" from="LaunchMenu/VBoxContainer/PlayButton" to="." method="BeginLaunch"]
+[connection signal="pressed" from="LaunchMenu/VBoxContainer/QuitButton" to="." method="ExitGame"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/ResumeButton" to="." method="HidePauseMenu"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/QuitButton" to="." method="ExitGame"]
+[connection signal="pressed" from="RestartMenu/VBoxContainer/RestartButton" to="." method="RestartLevel"]
+[connection signal="pressed" from="RestartMenu/VBoxContainer/QuitButton" to="." method="ExitGame"]

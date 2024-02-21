@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://7t8qlhrtj63s"]
+
+[ext_resource type="Shader" path="res://Shaders/PostProcessing/DamageOverlayPost.gdshader" id="1_x8ejf"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qgxyn"]
+noise_type = 2
+cellular_jitter = 1.32
+cellular_return_type = 6
+domain_warp_enabled = true
+domain_warp_amplitude = 60.0
+domain_warp_frequency = 0.225
+domain_warp_fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qq6bg"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_qgxyn")
+
+[sub_resource type="Gradient" id="Gradient_jxw5n"]
+colors = PackedColorArray(0.380787, 0.627493, 0.797979, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0aiey"]
+gradient = SubResource("Gradient_jxw5n")
+
+[resource]
+shader = ExtResource("1_x8ejf")
+shader_parameter/EffectStrength = 0.0
+shader_parameter/TextureEffect = 0.078
+shader_parameter/Feather = 1.0
+shader_parameter/MinRadius = 0.815
+shader_parameter/MaxRadius = -1.0
+shader_parameter/PulseSpeed = 3.0
+shader_parameter/PulsePower = 0.2
+shader_parameter/OverlayEffect = SubResource("NoiseTexture2D_qq6bg")
+shader_parameter/TintGradient = SubResource("GradientTexture1D_0aiey")

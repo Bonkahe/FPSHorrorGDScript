@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://day0mxshr604e"]
+
+[ext_resource type="Texture2D" uid="uid://cdq6sjwt5seeo" path="res://addons/vpainter/res/icons/icon_vpainter.svg" id="1"]
+[ext_resource type="Script" path="res://addons/vpainter/vpainter_activate_button.gd" id="2"]
+
+[node name="ui_activate_button" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
+button_path = NodePath("VPainter")
+
+[node name="VPainter" type="Button" parent="."]
+layout_mode = 0
+toggle_mode = true
+text = "Painter"
+icon = ExtResource("1")
+flat = true

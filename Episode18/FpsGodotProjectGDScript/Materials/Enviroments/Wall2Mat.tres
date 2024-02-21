@@ -1,0 +1,46 @@
+[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://bk6hfsss136d2"]
+
+[ext_resource type="Shader" uid="uid://chme55bh5wcl2" path="res://Shaders/Enviroments/WallShader.tres" id="1_ky2nw"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7noj8"]
+load_path = "res://.godot/imported/Rock2_Albedo.png-f47b14944f9d7bc7ad0e93fad39b2b7e.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_47sfe"]
+load_path = "res://.godot/imported/Rock2_Normals.png-d2f3e28d60915519d61766cd43143d83.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8dho3"]
+load_path = "res://.godot/imported/Rock2_Roughness.png-6290e58df09b8a038cf8bf9803d75fff.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4vjwd"]
+load_path = "res://.godot/imported/Rock1_Albedo.png-f2e1eb6409c0b6e84de58eda8d7afef2.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_exxpw"]
+load_path = "res://.godot/imported/Rock1_Normals.png-4a40a2bb41372688e44d423e4b2caa3a.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tccju"]
+load_path = "res://.godot/imported/Rock1_Roughness.png-9b6e0f781fcffee380cc6a4503c4a4f9.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xioki"]
+load_path = "res://.godot/imported/Rock2_Roughness.png-6290e58df09b8a038cf8bf9803d75fff.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lndpq"]
+load_path = "res://.godot/imported/Wall1_normals.png-78a6a64a16f17a2058e96ccc79cc6ad9.s3tc.ctex"
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ky2nw")
+shader_parameter/Tint = Color(0.52549, 0.592157, 0.784314, 1)
+shader_parameter/HeightMixMult = 1.05
+shader_parameter/NormalMapTypeBlend = 0.45
+shader_parameter/NormalMapPower = 2.679
+shader_parameter/triplanar_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 4.0
+shader_parameter/BandAlbedo = SubResource("CompressedTexture2D_7noj8")
+shader_parameter/BaseAlbedo = SubResource("CompressedTexture2D_4vjwd")
+shader_parameter/HeightMix = SubResource("CompressedTexture2D_xioki")
+shader_parameter/BandRoughness = SubResource("CompressedTexture2D_8dho3")
+shader_parameter/BaseRoughness = SubResource("CompressedTexture2D_tccju")
+shader_parameter/WallNormalMap = SubResource("CompressedTexture2D_lndpq")
+shader_parameter/BandNormal = SubResource("CompressedTexture2D_47sfe")
+shader_parameter/BaseNormal = SubResource("CompressedTexture2D_exxpw")

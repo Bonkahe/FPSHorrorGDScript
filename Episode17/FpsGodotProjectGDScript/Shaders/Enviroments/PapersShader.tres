@@ -1,0 +1,117 @@
+[gd_resource type="VisualShader" load_steps=10 format=3 uid="uid://c44m80yk1qtcm"]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_b87ir"]
+parameter_name = "Roughness"
+hint = 1
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_hyidt"]
+parameter_name = "ColorTint"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_o2cuw"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_36f4a"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_w1w87"]
+parameter_name = "Albedo"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_233al"]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_co4ni"]
+parameter_name = "NormalMap"
+texture_type = 2
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_idvlr"]
+parameter_name = "NormalMapPower"
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_h7tjv"]
+parameter_name = "AlphaClip"
+hint = 1
+default_value_enabled = true
+default_value = 0.5
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec4 ColorTint : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+uniform sampler2D Albedo : source_color;
+uniform float Roughness : hint_range(0, 1) = 1;
+uniform sampler2D NormalMap : hint_normal;
+uniform float NormalMapPower = 1;
+uniform float AlphaClip : hint_range(0, 1) = 0.5;
+
+
+
+void fragment() {
+// ColorParameter:14
+	vec4 n_out14p0 = ColorTint;
+
+
+	vec4 n_out2p0;
+// Texture2D:2
+	n_out2p0 = texture(Albedo, UV);
+	float n_out2p4 = n_out2p0.a;
+
+
+// VectorOp:17
+	vec3 n_out17p0 = vec3(n_out14p0.xyz) * vec3(n_out2p0.xyz);
+
+
+// FloatParameter:10
+	float n_out10p0 = Roughness;
+
+
+	vec4 n_out6p0;
+// Texture2D:6
+	n_out6p0 = texture(NormalMap, UV);
+
+
+// FloatParameter:8
+	float n_out8p0 = NormalMapPower;
+
+
+// FloatParameter:9
+	float n_out9p0 = AlphaClip;
+
+
+// Output:0
+	ALBEDO = n_out17p0;
+	ALPHA = n_out2p4;
+	ROUGHNESS = n_out10p0;
+	NORMAL_MAP = vec3(n_out6p0.xyz);
+	NORMAL_MAP_DEPTH = n_out8p0;
+	ALPHA_SCISSOR_THRESHOLD = n_out9p0;
+
+
+}
+"
+nodes/fragment/0/position = Vector2(600, 160)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_36f4a")
+nodes/fragment/2/position = Vector2(-140, 120)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_w1w87")
+nodes/fragment/3/position = Vector2(-620, 80)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_233al")
+nodes/fragment/6/position = Vector2(-140, 740)
+nodes/fragment/7/node = SubResource("VisualShaderNodeTexture2DParameter_co4ni")
+nodes/fragment/7/position = Vector2(-620, 700)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatParameter_idvlr")
+nodes/fragment/8/position = Vector2(-140, 960)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatParameter_h7tjv")
+nodes/fragment/9/position = Vector2(140, 1000)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatParameter_b87ir")
+nodes/fragment/10/position = Vector2(-240, 320)
+nodes/fragment/14/node = SubResource("VisualShaderNodeColorParameter_hyidt")
+nodes/fragment/14/position = Vector2(-400, -140)
+nodes/fragment/17/node = SubResource("VisualShaderNodeVectorOp_o2cuw")
+nodes/fragment/17/position = Vector2(380, 40)
+nodes/fragment/connections = PackedInt32Array(3, 0, 2, 2, 7, 0, 6, 2, 6, 0, 0, 9, 8, 0, 0, 10, 9, 0, 0, 19, 2, 4, 0, 1, 10, 0, 0, 3, 2, 0, 17, 1, 17, 0, 0, 0, 14, 0, 17, 0)
