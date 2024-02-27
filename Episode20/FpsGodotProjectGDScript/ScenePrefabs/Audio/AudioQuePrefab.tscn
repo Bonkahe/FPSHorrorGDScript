@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq7osjnvas3mi"]
+
+[ext_resource type="Script" path="res://Code/Audio/AudioQue.gd" id="1_a1jnd"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+bus = &"PlayerEffects"
+script = ExtResource("1_a1jnd")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://0veccphjym0"]
+
+[ext_resource type="Script" path="res://Code/Helpers/TriggerVolume.gd" id="1_enkmf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0y2xq"]
+size = Vector3(5, 10, 50)
+
+[node name="SpawnTrigger" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_enkmf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0y2xq")
+
+[connection signal="body_entered" from="." to="." method="TriggerVolume_BodyEntered"]

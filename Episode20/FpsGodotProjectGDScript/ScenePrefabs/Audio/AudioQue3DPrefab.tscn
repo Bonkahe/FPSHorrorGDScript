@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://btjnyo04qwi6h"]
+
+[ext_resource type="Script" path="res://Code/Audio/AudioQue3D.gd" id="1_teh1a"]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D"]
+unit_size = 20.0
+script = ExtResource("1_teh1a")

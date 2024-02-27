@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bc56y80j3e74s"
+path="res://.godot/imported/JumpStop 6-Gravel.wav-04110ab544eded3d9e281aea0b680401.sample"
+
+[deps]
+
+source_file="res://Audio/Footsteps/JumpStop 6-Gravel.wav"
+dest_files=["res://.godot/imported/JumpStop 6-Gravel.wav-04110ab544eded3d9e281aea0b680401.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

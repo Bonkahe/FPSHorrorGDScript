@@ -1,0 +1,37 @@
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://kao4lym3v7kg"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_0eoag"]
+resource_name = "Reverb"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_em865"]
+resource_name = "Reverb"
+room_size = 0.43
+damping = 0.21
+spread = 0.25
+dry = 0.48
+wet = 0.2
+
+[resource]
+bus/0/volume_db = 0.464998
+bus/1/name = &"Ambience"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = -3.32444
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_0eoag")
+bus/1/effect/0/enabled = true
+bus/2/name = &"Effects"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/3/name = &"PlayerEffects"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -1.51925
+bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectReverb_em865")
+bus/3/effect/0/enabled = false

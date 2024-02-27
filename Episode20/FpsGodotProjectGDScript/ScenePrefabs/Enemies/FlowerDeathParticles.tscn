@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://civ6qfguhtkmx"]
+
+[sub_resource type="Gradient" id="Gradient_8iytk"]
+offsets = PackedFloat32Array(0.492918, 0.538244)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_573bd"]
+gradient = SubResource("Gradient_8iytk")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_malfj"]
+render_priority = -128
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_573bd")
+emission_enabled = true
+emission = Color(0.568627, 0.54902, 0.886275, 1)
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+proximity_fade_enabled = true
+proximity_fade_distance = 10.0
+distance_fade_mode = 1
+distance_fade_min_distance = 100.0
+distance_fade_max_distance = 50.0
+
+[sub_resource type="Gradient" id="Gradient_64g4c"]
+offsets = PackedFloat32Array(0, 0.189802, 0.730878, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lujfb"]
+gradient = SubResource("Gradient_64g4c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_65bnv"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 2, 0)
+damping_min = 0.1
+damping_max = 0.2
+scale_min = 0.1
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_lujfb")
+turbulence_enabled = true
+turbulence_noise_scale = 2.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iwvoa"]
+size = Vector2(0.2, 0.2)
+orientation = 2
+
+[node name="FlowerDeathParticles" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_malfj")
+emitting = false
+amount = 400
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.4
+visibility_aabb = AABB(-27.1491, -48.2284, -23.6184, 48.6155, 58.4165, 46.8525)
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_65bnv")
+draw_pass_1 = SubResource("PlaneMesh_iwvoa")
